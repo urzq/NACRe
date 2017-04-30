@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shader\Program.cpp">
+      <Filter>src\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shader\Shader.cpp">
+      <Filter>src\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cube.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Clock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh\MeshLight.cpp">
+      <Filter>src\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mesh\MeshCube.cpp">
+      <Filter>src\mesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Renderer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\Program.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\Shader.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cube.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Clock.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mesh\MeshLight.h">
+      <Filter>src\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mesh\MeshCube.h">
+      <Filter>src\mesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{bde29b1b-d83c-4c63-94e0-6e19a7e8d39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data">
+      <UniqueIdentifier>{1ac14bd8-aae3-4dcc-82cb-a3df71426648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\shader">
+      <UniqueIdentifier>{98a66338-109f-466f-81c7-3469f596b951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\shader">
+      <UniqueIdentifier>{d392d161-96f5-4d5c-a2e2-334e5c6e15bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\mesh">
+      <UniqueIdentifier>{581e87f0-d568-4016-9c47-13feb2a7cce5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\shader\Light.frag">
+      <Filter>data\shader</Filter>
+    </None>
+    <None Include="data\shader\Light.vert">
+      <Filter>data\shader</Filter>
+    </None>
+    <None Include="data\shader\Cube.vert">
+      <Filter>data\shader</Filter>
+    </None>
+    <None Include="data\shader\Cube.frag">
+      <Filter>data\shader</Filter>
+    </None>
+  </ItemGroup>
+</Project>

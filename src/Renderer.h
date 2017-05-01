@@ -12,6 +12,8 @@ public:
 	Renderer(const char* windowName, glm::uvec2 windowSize);
 	~Renderer();
 
+	void SetClearColor(glm::vec3 clearColor);
+
 	void Render();
 	bool IsRunning();
 

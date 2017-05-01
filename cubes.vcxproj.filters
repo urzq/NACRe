@@ -34,6 +34,9 @@
     <ClCompile Include="src\cube\CubePreRender.cpp">
       <Filter>src\cube</Filter>
     </ClCompile>
+    <ClCompile Include="src\core\Color.cpp">
+      <Filter>src\color</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">
@@ -66,6 +69,9 @@
     <ClInclude Include="src\cube\CubePreRender.h">
       <Filter>src\cube</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Color.h">
+      <Filter>src\color</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -85,6 +91,9 @@
     </Filter>
     <Filter Include="src\cube">
       <UniqueIdentifier>{cc924c83-c878-4b6c-9613-ac6d6402780a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\color">
+      <UniqueIdentifier>{bf248384-b9a1-4fa8-8a3e-1226ca47ef4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

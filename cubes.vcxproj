@@ -156,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Clock.cpp" />
+    <ClCompile Include="src\core\Color.cpp" />
     <ClCompile Include="src\cube\Cube.cpp" />
     <ClCompile Include="src\cube\CubePreRender.cpp" />
     <ClCompile Include="src\Light.cpp" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Clock.h" />
+    <ClInclude Include="src\core\Color.h" />
     <ClInclude Include="src\cube\Cube.h" />
     <ClInclude Include="src\cube\CubePreRender.h" />
     <ClInclude Include="src\Light.h" />

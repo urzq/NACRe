@@ -63,6 +63,11 @@ Renderer::~Renderer()
 	glfwTerminate();
 }
 
+void Renderer::SetClearColor(glm::vec3 clearColor)
+{
+	glClearColor(clearColor.x, clearColor.y, clearColor.z, 0.0f);
+}
+
 bool Renderer::IsRunning()
 {
 	// Check if the ESC key was pressed or the window was closed

@@ -13,7 +13,8 @@ public:
 	void Update(float dT);
 	void Render(const glm::mat4& projection, const glm::mat4& view);
 
-	void SetPosition(glm::vec3& position);
+	void SetPosition(const glm::vec3& position);
+	void SetColor(const glm::vec3& color);
 
 private:
 	glm::mat4 GetModel() const;
@@ -22,11 +23,12 @@ private:
 	glm::vec3 m_Position;
 	glm::vec3 m_Scale;
 	glm::vec3 m_OffsetPosition;
+	glm::vec3 m_ObjectColor;
 
-	GLuint m_ObjectColor;
-	GLuint m_Model;
-	GLuint m_View;
-	GLuint m_Proj;
+	GLuint m_ObjectColorLoc;
+	GLuint m_ModelLoc;
+	GLuint m_ViewLoc;
+	GLuint m_ProjLoc;
 
 	float m_TotalTime;
 };

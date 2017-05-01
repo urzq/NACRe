@@ -11,8 +11,9 @@
 #include "cube/CubePreRender.h"
 
 #include "Light.h"
-
 #include "Clock.h"
+#include "core/Color.h"
+
 
 std::vector<Cube> GetCubes(const Program& program)
 {
@@ -33,11 +34,29 @@ std::vector<Cube> GetCubes(const Program& program)
 	return cubes;
 }
 
+void SetCubeColors(std::vector<Cube>& cubes)
+{
+	Color colors[] = 
+	{
+		0xF6C4FF, 0xC4DCFF, 0x81FF68, 0xBAFFC3, 0xE6CEFF,
+		0xFFA100, 0xFF2D1E, 0xFFA928, 0xFFC249, 0xFFFFA3,
+		0xAAFFBE, 0xFF7298, 0x30FF5D, 0xFF7298, 0xFFBD5B,
+		0xFFE100, 0xFF7F00, 0xFFFB8E, 0xAFFFF4, 0x81FF68,
+		0xFF0C00, 0xC6FFD2, 0xFFBD23, 0xFF431E, 0x00FFB6 
+	};
+
+	for(size_t i = 0; i<cubes.size(); ++i)
+	{ 
+		cubes[i].SetColor(colors[i]);
+	}
+}
+
 int main()
 {
 	Clock clock;
 	Renderer renderer("Cubes", glm::uvec2(1024, 768));
-	
+	renderer.SetClearColor( Color(0x84A5FF) );
+
 	MeshCube meshCube;
 	MeshLight meshLight;
 
@@ -50,6 +69,8 @@ int main()
 
 	CubePreRender cubePreRender(programCube);
 	std::vector<Cube> cubes = GetCubes(programCube);
+	SetCubeColors(cubes);
+
 	Light light(lightMatrixID);
 
 	while (renderer.IsRunning())

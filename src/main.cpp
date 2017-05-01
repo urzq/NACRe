@@ -86,7 +86,7 @@ int main()
 		programCube.Use();
 
 		light.Update(clock.dT());
-		cubePreRender.PreRender(light.GetPosition(), glm::vec3(1));
+		cubePreRender.PreRender(light.GetPosition(), camera.GetPosition(), glm::vec3(1));
 
 		for (auto& cube : cubes)
 		{

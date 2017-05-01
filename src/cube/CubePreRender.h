@@ -9,11 +9,12 @@ public:
 	CubePreRender(const Program& program);
 
 	// Before looping over all the cubes, call this function. It sets the light data in the shader.
-	void PreRender(const glm::vec3& lightPos, const glm::vec3& lighColor);
+	void PreRender(const glm::vec3& lightPos, const glm::vec3& camPos, const glm::vec3& lighColor);
 
 private:
-	GLuint m_LightColor;
-	GLuint m_LightPos;
+	GLuint m_LightColorLoc;
+	GLuint m_LightPosLoc;
+	GLuint m_ViewPosLoc;
 };
 
 #endif

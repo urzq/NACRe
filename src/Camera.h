@@ -9,8 +9,10 @@ public:
 	Camera(GLFWwindow* window);
 
 	void Update(float dT);
-	glm::mat4 GetViewMatrix();
-	glm::mat4 GetProjectionMatrix();
+
+	glm::mat4 GetViewMatrix() const;
+	glm::mat4 GetProjectionMatrix() const;
+	glm::vec3 GetPosition() const;
 
 private:
 	GLFWwindow* m_Window;

@@ -57,9 +57,9 @@ void Shader::CompileShaderCode(const char* shaderCode) const
 
 	if (infoLogLength > 0)
 	{
-		std::vector<char> errorMessage(infoLogLength + 1);
+		char errorMessage[4096];
 		glGetShaderInfoLog(m_ShaderID, infoLogLength, NULL, &errorMessage[0]);
-		
-		throw std::string(errorMessage.begin(), errorMessage.end());
+
+		throw std::string(errorMessage);
 	}
 }

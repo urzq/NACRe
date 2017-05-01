@@ -14,15 +14,21 @@ Camera::Camera(GLFWwindow* window):
 {
 }
 
-glm::mat4 Camera::GetViewMatrix()
+glm::mat4 Camera::GetViewMatrix() const
 {
 	return m_ViewMatrix;
 }
 
-glm::mat4 Camera::GetProjectionMatrix()
+glm::mat4 Camera::GetProjectionMatrix() const
 {
 	return m_ProjectionMatrix;
 }
+
+glm::vec3 Camera::GetPosition() const
+{
+	return m_Position;
+}
+
 
 void Camera::Update(float dT)
 {

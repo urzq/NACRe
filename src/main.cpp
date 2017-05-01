@@ -7,7 +7,9 @@
 #include "mesh/MeshCube.h"
 #include "mesh/MeshLight.h"
 
-#include "Cube.h"
+#include "cube/Cube.h"
+#include "cube/CubePreRender.h"
+
 #include "Light.h"
 
 #include "Clock.h"
@@ -42,11 +44,11 @@ int main()
 	Program programCube("Cube.vert", "Cube.frag");
 	Program programLight("Light.vert", "Light.frag");
 
-	// Utiliser les 3 matrices séparées comme pour les cubes.
 	GLuint lightMatrixID = programLight.GetUniformLocation("MVP");
 
 	Camera camera( renderer.GetGLFWwindow() );
 
+	CubePreRender cubePreRender(programCube);
 	std::vector<Cube> cubes = GetCubes(programCube);
 	Light light(lightMatrixID);
 
@@ -63,12 +65,12 @@ int main()
 		programCube.Use();
 
 		light.Update(clock.dT());
-		glm::vec3 lightPos = light.GetPosition();
+		cubePreRender.PreRender(light.GetPosition(), glm::vec3(1));
 
 		for (auto& cube : cubes)
 		{
 			cube.Update(clock.dT());
-			cube.Render(projection, view, lightPos);
+			cube.Render(projection, view);
 		}
 
 		meshLight.Use();
@@ -76,7 +78,6 @@ int main()
 		light.Render(projection, view);
 
 		renderer.Render();
-
 	}
 
 	return EXIT_SUCCESS;

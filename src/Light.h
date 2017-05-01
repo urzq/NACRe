@@ -17,6 +17,7 @@ public:
 private:
 	glm::vec3 m_Position;
 	glm::vec3 m_Rotation;
+	glm::vec3 m_Scale;
 
 	const float m_Radius;
 	GLuint m_MatrixID;

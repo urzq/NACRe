@@ -11,7 +11,7 @@ public:
 	Cube(const Program& program, float initTime);
 	
 	void Update(float dT);
-	void Render(const glm::mat4& projection, const glm::mat4& view, const glm::vec3& lightPos);
+	void Render(const glm::mat4& projection, const glm::mat4& view);
 
 	void SetPosition(glm::vec3& position);
 
@@ -24,8 +24,6 @@ private:
 	glm::vec3 m_OffsetPosition;
 
 	GLuint m_ObjectColor;
-	GLuint m_LightColor;
-	GLuint m_LightPos;
 	GLuint m_Model;
 	GLuint m_View;
 	GLuint m_Proj;

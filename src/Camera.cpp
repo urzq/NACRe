@@ -1,7 +1,7 @@
-// Include GLFW
+#include <iostream>
+
 #include <glfw3.h>
 
-// Include GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
@@ -71,7 +71,13 @@ void Camera::Update(float dT)
 		m_Position -= right * dT * m_Speed;
 	}
 
-	float FoV = m_InitialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
+	if (glfwGetKey(m_Window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	{
+		std::cout << m_HorizontalAngle << " " << m_VerticalAngle <<  "\n";
+		std::cout << m_Position.x << " " << m_Position.y << " " << m_Position.z << "\n";
+	}
+
+	float FoV = m_InitialFoV;
 
 	m_ProjectionMatrix = glm::perspective(FoV, 4.0f / 3.0f, 0.1f, 100.0f);
 	m_ViewMatrix = glm::lookAt(m_Position, m_Position + direction, up);

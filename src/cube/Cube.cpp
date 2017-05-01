@@ -12,8 +12,6 @@ Cube::Cube(const Program& program, float initTime):
 	m_Scale = glm::vec3(0.7f);
 
 	m_ObjectColor	= program.GetUniformLocation("objectColor");
-	m_LightColor	= program.GetUniformLocation("lightColor");
-	m_LightPos		= program.GetUniformLocation("lightPos");
 	m_Model			= program.GetUniformLocation("model");
 	m_View			= program.GetUniformLocation("view");
 	m_Proj			= program.GetUniformLocation("projection");
@@ -30,11 +28,9 @@ void Cube::Update(float dT)
 	m_OffsetPosition.z = sin(m_TotalTime);
 }
 
-void Cube::Render(const glm::mat4& projection, const glm::mat4& view, const glm::vec3& lightPos)
+void Cube::Render(const glm::mat4& projection, const glm::mat4& view)
 {
 	glUniform3f(m_ObjectColor, 1.0f, 0.5f, 0.31f);
-	glUniform3f(m_LightColor, 1.0f, 1.0f, 1.0f);
-	glUniform3f(m_LightPos, lightPos.x, lightPos.y, lightPos.z);
 
 	// Pass the matrices to the shader
 	glUniformMatrix4fv(m_View, 1, GL_FALSE, glm::value_ptr(view));

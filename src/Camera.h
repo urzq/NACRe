@@ -19,12 +19,12 @@ private:
 	glm::mat4 m_ProjectionMatrix;
 
 	// Initial position : on +Z
-	glm::vec3 m_Position = glm::vec3(0, 0, 5);
+	glm::vec3 m_Position = glm::vec3(3.83f, 0.82f, 6.85f);
 
 	// Initial horizontal angle : toward -Z
-	float m_HorizontalAngle = 3.14f;
+	float m_HorizontalAngle = 3.8f;
 	// Initial vertical angle : none
-	float m_VerticalAngle = 0.0f;
+	float m_VerticalAngle = -0.11;
 	// Initial Field of View
 	float m_InitialFoV = 45.0f;
 

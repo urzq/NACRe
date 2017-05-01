@@ -13,9 +13,6 @@
     <ClCompile Include="src\shader\Shader.cpp">
       <Filter>src\shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\Cube.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Camera.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -31,6 +28,12 @@
     <ClCompile Include="src\mesh\MeshCube.cpp">
       <Filter>src\mesh</Filter>
     </ClCompile>
+    <ClCompile Include="src\cube\Cube.cpp">
+      <Filter>src\cube</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cube\CubePreRender.cpp">
+      <Filter>src\cube</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Renderer.h">
@@ -41,9 +44,6 @@
     </ClInclude>
     <ClInclude Include="src\shader\Shader.h">
       <Filter>src\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Cube.h">
-      <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Camera.h">
       <Filter>src</Filter>
@@ -59,6 +59,12 @@
     </ClInclude>
     <ClInclude Include="src\mesh\MeshCube.h">
       <Filter>src\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cube\Cube.h">
+      <Filter>src\cube</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cube\CubePreRender.h">
+      <Filter>src\cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,9 @@
     </Filter>
     <Filter Include="src\mesh">
       <UniqueIdentifier>{581e87f0-d568-4016-9c47-13feb2a7cce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\cube">
+      <UniqueIdentifier>{cc924c83-c878-4b6c-9613-ac6d6402780a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

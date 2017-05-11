@@ -4,8 +4,8 @@
 #include <GL/glew.h>
 #include <glfw3.h>
 
-#include "shader/ShaderProgram.h"
-#include "mesh/VertexBuffer.h"
+#include "Shader/ShaderProgram.h"
+#include "VertexBuffer/VertexBuffer.h"
 
 #include "Renderable.h"
 #include "Renderer.h"

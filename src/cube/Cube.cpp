@@ -2,12 +2,14 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Cube.h"
-#include "shader/ShaderProgram.h"
-#include "ServiceLocator.h"
+#include "Core/ServiceLocator.h"
 
-#include "Renderer.h"
-#include "Renderable.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/Renderable.h"
+
+#include "Shader/ShaderProgram.h"
+
+#include "Cube.h"
 
 Cube::Cube(float initTime) :
 	m_TotalTime(initTime)

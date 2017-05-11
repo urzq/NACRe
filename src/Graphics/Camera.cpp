@@ -6,10 +6,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "ServiceLocator.h"
-#include "Renderer.h"
+#include "Core/ServiceLocator.h"
 
-#include "Camera.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/Camera.h"
 
 using namespace glm;
 

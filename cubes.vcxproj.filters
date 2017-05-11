@@ -4,94 +4,94 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderer.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shader\Shader.cpp">
-      <Filter>src\shader</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Clock.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Light.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\cube\Cube.cpp">
-      <Filter>src\cube</Filter>
-    </ClCompile>
     <ClCompile Include="src\core\Color.cpp">
-      <Filter>src\color</Filter>
+      <Filter>src\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\mesh\VertexBuffer.cpp">
-      <Filter>src\mesh</Filter>
+    <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp">
+      <Filter>src\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="src\ServiceLocator.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\VertexBuffer\VertexBufferManager.cpp">
+      <Filter>src\VertexBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="src\mesh\VertexBufferManager.cpp">
-      <Filter>src\mesh</Filter>
+    <ClCompile Include="src\Shader\Shader.cpp">
+      <Filter>src\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\Renderable.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\Shader\ShaderProgram.cpp">
+      <Filter>src\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\Transform.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="src\Shader\ShaderProgramManager.cpp">
+      <Filter>src\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\shader\ShaderProgram.cpp">
-      <Filter>src\shader</Filter>
+    <ClCompile Include="src\Cube\Cube.cpp">
+      <Filter>src\Cube</Filter>
     </ClCompile>
-    <ClCompile Include="src\shader\ShaderProgramManager.cpp">
-      <Filter>src\shader</Filter>
+    <ClCompile Include="src\Graphics\Transform.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Renderer.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Renderable.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Light.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Camera.cpp">
+      <Filter>src\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Clock.cpp">
+      <Filter>src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\ServiceLocator.cpp">
+      <Filter>src\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Renderer.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\shader\Shader.h">
-      <Filter>src\shader</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Camera.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Clock.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Light.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\cube\Cube.h">
-      <Filter>src\cube</Filter>
-    </ClInclude>
     <ClInclude Include="src\core\Color.h">
-      <Filter>src\color</Filter>
+      <Filter>src\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\mesh\VertexBuffer.h">
-      <Filter>src\mesh</Filter>
+    <ClInclude Include="src\VertexBuffer\VertexBuffer.h">
+      <Filter>src\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="src\ServiceLocator.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\VertexBuffer\VertexBufferData.h">
+      <Filter>src\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="src\mesh\VertexBufferManager.h">
-      <Filter>src\mesh</Filter>
+    <ClInclude Include="src\VertexBuffer\VertexBufferManager.h">
+      <Filter>src\VertexBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="src\mesh\VertexBufferData.h">
-      <Filter>src\mesh</Filter>
+    <ClInclude Include="src\Shader\Shader.h">
+      <Filter>src\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Renderable.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\Shader\ShaderProgram.h">
+      <Filter>src\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Transform.h">
-      <Filter>src</Filter>
+    <ClInclude Include="src\Shader\ShaderProgramManager.h">
+      <Filter>src\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\shader\ShaderProgram.h">
-      <Filter>src\shader</Filter>
+    <ClInclude Include="src\Cube\Cube.h">
+      <Filter>src\Cube</Filter>
     </ClInclude>
-    <ClInclude Include="src\shader\ShaderProgramManager.h">
-      <Filter>src\shader</Filter>
+    <ClInclude Include="src\Graphics\Transform.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Renderer.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Renderable.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Light.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Graphics\Camera.h">
+      <Filter>src\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Clock.h">
+      <Filter>src\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ServiceLocator.h">
+      <Filter>src\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,34 +101,37 @@
     <Filter Include="data">
       <UniqueIdentifier>{1ac14bd8-aae3-4dcc-82cb-a3df71426648}</UniqueIdentifier>
     </Filter>
-    <Filter Include="data\shader">
-      <UniqueIdentifier>{98a66338-109f-466f-81c7-3469f596b951}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\shader">
-      <UniqueIdentifier>{d392d161-96f5-4d5c-a2e2-334e5c6e15bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\mesh">
+    <Filter Include="src\VertexBuffer">
       <UniqueIdentifier>{581e87f0-d568-4016-9c47-13feb2a7cce5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\cube">
+    <Filter Include="src\Shader">
+      <UniqueIdentifier>{d392d161-96f5-4d5c-a2e2-334e5c6e15bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Cube">
       <UniqueIdentifier>{cc924c83-c878-4b6c-9613-ac6d6402780a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\color">
+    <Filter Include="src\Core">
       <UniqueIdentifier>{bf248384-b9a1-4fa8-8a3e-1226ca47ef4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\Shader">
+      <UniqueIdentifier>{98a66338-109f-466f-81c7-3469f596b951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Graphics">
+      <UniqueIdentifier>{22206e7c-7bc2-4f43-b806-866a37eb7d80}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\shader\Light.frag">
-      <Filter>data\shader</Filter>
+      <Filter>data\Shader</Filter>
     </None>
     <None Include="data\shader\Light.vert">
-      <Filter>data\shader</Filter>
+      <Filter>data\Shader</Filter>
     </None>
     <None Include="data\shader\Cube.vert">
-      <Filter>data\shader</Filter>
+      <Filter>data\Shader</Filter>
     </None>
     <None Include="data\shader\Cube.frag">
-      <Filter>data\shader</Filter>
+      <Filter>data\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -1,15 +1,16 @@
 #include <vector>
 
-#include "ServiceLocator.h"
-#include "Renderer.h"
-#include "shader/ShaderProgram.h"
-#include "Camera.h"
+#include "Graphics/Renderer.h"
+#include "Graphics/Light.h"
+#include "Graphics/Camera.h"
 
-#include "cube/Cube.h"
+#include "Shader/ShaderProgram.h"
 
-#include "Light.h"
-#include "Clock.h"
-#include "core/Color.h"
+#include "Core/Clock.h"
+#include "Core/Color.h"
+#include "Core/ServiceLocator.h"
+
+#include "Cube/Cube.h"
 
 /* TODO:
 	PUSHER !

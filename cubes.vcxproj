@@ -154,38 +154,38 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\Clock.cpp" />
+    <ClCompile Include="src\Core\Clock.cpp" />
     <ClCompile Include="src\core\Color.cpp" />
-    <ClCompile Include="src\cube\Cube.cpp" />
-    <ClCompile Include="src\Light.cpp" />
+    <ClCompile Include="src\Core\ServiceLocator.cpp" />
+    <ClCompile Include="src\Cube\Cube.cpp" />
+    <ClCompile Include="src\Graphics\Camera.cpp" />
+    <ClCompile Include="src\Graphics\Light.cpp" />
+    <ClCompile Include="src\Graphics\Renderable.cpp" />
+    <ClCompile Include="src\Graphics\Renderer.cpp" />
+    <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\mesh\VertexBuffer.cpp" />
-    <ClCompile Include="src\mesh\VertexBufferManager.cpp" />
-    <ClCompile Include="src\Renderable.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\ServiceLocator.cpp" />
-    <ClCompile Include="src\shader\Shader.cpp" />
-    <ClCompile Include="src\shader\ShaderProgram.cpp" />
-    <ClCompile Include="src\shader\ShaderProgramManager.cpp" />
-    <ClCompile Include="src\Transform.cpp" />
+    <ClCompile Include="src\Shader\Shader.cpp" />
+    <ClCompile Include="src\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="src\Shader\ShaderProgramManager.cpp" />
+    <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp" />
+    <ClCompile Include="src\VertexBuffer\VertexBufferManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\Clock.h" />
+    <ClInclude Include="src\Core\Clock.h" />
     <ClInclude Include="src\core\Color.h" />
-    <ClInclude Include="src\cube\Cube.h" />
-    <ClInclude Include="src\Light.h" />
-    <ClInclude Include="src\mesh\VertexBuffer.h" />
-    <ClInclude Include="src\mesh\VertexBufferData.h" />
-    <ClInclude Include="src\mesh\VertexBufferManager.h" />
-    <ClInclude Include="src\Renderable.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\ServiceLocator.h" />
-    <ClInclude Include="src\shader\Shader.h" />
-    <ClInclude Include="src\shader\ShaderProgram.h" />
-    <ClInclude Include="src\shader\ShaderProgramManager.h" />
-    <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Core\ServiceLocator.h" />
+    <ClInclude Include="src\Cube\Cube.h" />
+    <ClInclude Include="src\Graphics\Camera.h" />
+    <ClInclude Include="src\Graphics\Light.h" />
+    <ClInclude Include="src\Graphics\Renderable.h" />
+    <ClInclude Include="src\Graphics\Renderer.h" />
+    <ClInclude Include="src\Graphics\Transform.h" />
+    <ClInclude Include="src\Shader\Shader.h" />
+    <ClInclude Include="src\Shader\ShaderProgram.h" />
+    <ClInclude Include="src\Shader\ShaderProgramManager.h" />
+    <ClInclude Include="src\VertexBuffer\VertexBuffer.h" />
+    <ClInclude Include="src\VertexBuffer\VertexBufferData.h" />
+    <ClInclude Include="src\VertexBuffer\VertexBufferManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\shader\Cube.frag" />

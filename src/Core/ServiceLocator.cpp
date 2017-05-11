@@ -1,7 +1,6 @@
-#include "Renderer.h"
-
-#include "mesh/VertexBufferManager.h"
-#include "shader/ShaderProgramManager.h"
+#include "Graphics/Renderer.h"
+#include "VertexBuffer/VertexBufferManager.h"
+#include "Shader/ShaderProgramManager.h"
 
 #include "ServiceLocator.h"
 

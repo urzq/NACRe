@@ -7,15 +7,25 @@
 #include "Graphics/Renderer.h"
 #include "Graphics/Renderable.h"
 
+#include "Shader/ShaderProgramManager.h"
 #include "Shader/ShaderProgram.h"
+
+#include "VertexBuffer/VertexBufferManager.h"
+#include "VertexBuffer/VertexBuffer.h"
 
 #include "WhiteCube.h"
 
 WhiteCube::WhiteCube():
 	m_TotalTime(0.0f)
 {
-	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
-	m_Renderable = renderer->CreateRenderable("cube", "FlatColor.vert", "FlatColor.frag");
+	auto vertexBufferManager = ServiceLocator::GetInstance()->GetVertexBuferManager();
+	VertexBuffer* vertexBuffer = vertexBufferManager->GetVertexBuffer("cube");
+
+	auto shaderProgramManager = ServiceLocator::GetInstance()->GetShaderProgramManager();
+	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("FlatColor.vert", "FlatColor.frag");
+
+	auto renderer = ServiceLocator::GetInstance()->GetRenderer();
+	m_Renderable = renderer->CreateRenderable(vertexBuffer, shaderProgram);
 
 	m_Renderable->GetTransform().SetScale({ 0.2f, 0.2f, 0.2f });
 }

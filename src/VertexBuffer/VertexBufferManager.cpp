@@ -56,7 +56,7 @@ VertexBuffer* VertexBufferManager::CreateVertexBuffer(const std::string& meshNam
 	}
 	else if (meshName == "sphere")
 	{
-		auto sphere = MakeUniqueMesh( par_shapes_create_parametric_sphere(20, 20) );
+		auto sphere = MakeUniqueMesh(par_shapes_create_subdivided_sphere(5) );
 		return CreateVertexBuffer(sphere.get());
 	}
 

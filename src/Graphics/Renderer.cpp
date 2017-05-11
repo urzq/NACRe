@@ -139,9 +139,9 @@ Light& Renderer::GetLight()
 	return m_Light;
 }
 
-Renderable* Renderer::CreateRenderable(const std::string& meshName, const std::string& vertexFilePath, const std::string& fragmentFilePath)
+Renderable* Renderer::CreateRenderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram)
 {
-	auto renderable = new Renderable(meshName, vertexFilePath, fragmentFilePath);
+	auto renderable = new Renderable(refVertexBuffer, refShaderProgram);
 	m_Renderables.push_back(renderable);
 	
 	return renderable;

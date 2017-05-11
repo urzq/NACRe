@@ -27,7 +27,7 @@ public:
 	void Render(const glm::mat4& projection, const glm::mat4& view);
 	bool IsRunning();
 
-	Renderable* CreateRenderable(const std::string& meshName, const std::string& vertexFilePath, const std::string& fragmentFilePath);
+	Renderable* CreateRenderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram);
 	void DestroyRenderable(Renderable* renderable);
 
 	GLFWwindow* GetGLFWwindow() const;

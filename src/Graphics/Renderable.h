@@ -12,7 +12,7 @@ class Renderable
 	friend class Renderer;
 
 private:
-	Renderable(const std::string& meshName, const std::string& vertexFilePath, const std::string& fragmentFilePath);
+	Renderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram);
 	Renderable(const Renderable& other) = delete;
 	Renderable& operator=(const Renderable& other) = delete;
 	Renderable(Renderable&& other) = delete;
@@ -28,8 +28,8 @@ public:
 	void SetColor(const glm::vec3& color);
 
 private:
-	VertexBuffer* m_VertexBuffer;
-	ShaderProgram* m_ShaderProgram;
+	VertexBuffer* m_RefVertexBuffer;
+	ShaderProgram* m_RefShaderProgram;
 	Transform m_Transform;
 
 	// TODO: create a polymorphic material class ? 

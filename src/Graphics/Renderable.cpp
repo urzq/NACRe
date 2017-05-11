@@ -4,32 +4,25 @@
 
 #include "Renderable.h"
 
-Renderable::Renderable(const std::string& meshName, const std::string& vertexFilePath, const std::string& fragmentFilePath)
+Renderable::Renderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram):
+	m_RefVertexBuffer(refVertexBuffer),
+	m_RefShaderProgram(refShaderProgram),
+	m_ObjectColor(1,1,1)
 {
-	auto serviceLocator = ServiceLocator::GetInstance();
-	
-	auto vertexBufferMgr = serviceLocator->GetVertexBuferManager();
-	m_VertexBuffer = vertexBufferMgr->GetVertexBuffer(meshName);
-
-	auto shaderProgramMgr = serviceLocator->GetShaderProgramManager();
-	m_ShaderProgram = shaderProgramMgr->GetShaderProgram(vertexFilePath, fragmentFilePath);
-
-	m_ObjectColor = glm::vec3(1, 1, 1);
 }
 
 Renderable::~Renderable()
 {
-	// TODO: Handle the deallocation.
 }
 
 VertexBuffer* Renderable::GetVertexBuffer()
 {
-	return m_VertexBuffer;
+	return m_RefVertexBuffer;
 }
 
 ShaderProgram* Renderable::GetShaderProgram()
 {
-	return m_ShaderProgram;
+	return m_RefShaderProgram;
 }
 
 Transform& Renderable::GetTransform()

@@ -15,11 +15,9 @@
 
 /* TODO:
 	PUSHER !
-	---> Cleaner <---
 	Trouver un chouette nom
 	Transformer cette liste en anglais.
 	Passer à travers les différents TODO
-	Afficher la light avec un cube et le shader blanc.
 	Renommer les shaders avec de meillers noms.
 	Est-ce que le vertex buffer manager & le shader manager doivent être accédés comme ca ?
 	Templater le ServiceLocator.

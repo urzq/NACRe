@@ -27,12 +27,12 @@ private:
 	GLuint m_ProgramID;
 	
 	// Mandatory uniforms
-	GLuint m_ModelLoc;
-	GLuint m_ViewLoc;
-	GLuint m_ProjectionLoc;
+	GLint m_ModelLoc;
+	GLint m_ViewLoc;
+	GLint m_ProjectionLoc;
 
 	// Probably here, but not mandatory.
-	GLuint m_ObjectColorLoc;
+	GLint m_ObjectColorLoc;
 
 	// All others "exotic" uniforms that may appear in the shader.
 	std::unordered_map<std::string, GLuint> m_UniformLocations;

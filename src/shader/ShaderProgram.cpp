@@ -36,13 +36,13 @@ ShaderProgram::ShaderProgram(const std::string& vertex_file_path, const std::str
 	glDetachShader(m_ProgramID, fragmentShader.GetShaderID());
 
 	m_ModelLoc = glGetUniformLocation(m_ProgramID, "model");
-	assert(m_ModelLoc);
+	assert(m_ModelLoc != -1);
 
 	m_ViewLoc = glGetUniformLocation(m_ProgramID, "view");
-	assert(m_ViewLoc);
+	assert(m_ViewLoc != -1);
 
 	m_ProjectionLoc = glGetUniformLocation(m_ProgramID, "projection");
-	assert(m_ProjectionLoc);
+	assert(m_ProjectionLoc != -1);
 
 	m_ObjectColorLoc = glGetUniformLocation(m_ProgramID, "objectColor");
 }

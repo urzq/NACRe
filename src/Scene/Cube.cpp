@@ -15,7 +15,7 @@ Cube::Cube(float initTime) :
 	m_TotalTime(initTime)
 {
 	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
-	m_Renderable = renderer->CreateRenderable("sphere", "Cube.vert", "Cube.frag");
+	m_Renderable = renderer->CreateRenderable("sphere", "BasicPhong.vert", "BasicPhong.frag");
 
 	m_OffsetPosition = glm::vec3(0, 0, 0);
 }

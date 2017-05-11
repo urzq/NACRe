@@ -10,7 +10,8 @@
 #include "Core/Color.h"
 #include "Core/ServiceLocator.h"
 
-#include "Cube/Cube.h"
+#include "Scene/Cube.h"
+#include "Scene/WhiteCube.h"
 
 /* TODO:
 	PUSHER !
@@ -87,14 +88,16 @@ int main()
 	std::vector<Cube> cubes = GetCubes();
 	SetCubeColors(cubes);
 
+	WhiteCube cubeLight;
+
 	while (renderer->IsRunning())
 	{
 		clock.Update();
 
 		camera.Update(clock.dT());
 
-		// TODO : create a gameobject that moves the light.
-		renderer->GetLight().SetParameters(glm::vec3(-5,-5,-5), camera.GetPosition(), glm::vec3(1));
+		cubeLight.Update(clock.dT());
+		renderer->GetLight().SetParameters(cubeLight.GetPosition(), camera.GetPosition(), cubeLight.GetLightColor());
 
 		for (auto& cube : cubes)
 		{

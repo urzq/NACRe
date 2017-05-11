@@ -157,13 +157,14 @@
     <ClCompile Include="src\Core\Clock.cpp" />
     <ClCompile Include="src\core\Color.cpp" />
     <ClCompile Include="src\Core\ServiceLocator.cpp" />
-    <ClCompile Include="src\Cube\Cube.cpp" />
     <ClCompile Include="src\Graphics\Camera.cpp" />
     <ClCompile Include="src\Graphics\Light.cpp" />
     <ClCompile Include="src\Graphics\Renderable.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Scene\Cube.cpp" />
+    <ClCompile Include="src\Scene\WhiteCube.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
     <ClCompile Include="src\Shader\ShaderProgramManager.cpp" />
@@ -174,12 +175,13 @@
     <ClInclude Include="src\Core\Clock.h" />
     <ClInclude Include="src\core\Color.h" />
     <ClInclude Include="src\Core\ServiceLocator.h" />
-    <ClInclude Include="src\Cube\Cube.h" />
     <ClInclude Include="src\Graphics\Camera.h" />
     <ClInclude Include="src\Graphics\Light.h" />
     <ClInclude Include="src\Graphics\Renderable.h" />
     <ClInclude Include="src\Graphics\Renderer.h" />
     <ClInclude Include="src\Graphics\Transform.h" />
+    <ClInclude Include="src\Scene\Cube.h" />
+    <ClInclude Include="src\Scene\WhiteCube.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />
     <ClInclude Include="src\Shader\ShaderProgramManager.h" />
@@ -188,10 +190,10 @@
     <ClInclude Include="src\VertexBuffer\VertexBufferManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\shader\Cube.frag" />
-    <None Include="data\shader\Cube.vert" />
-    <None Include="data\shader\Light.frag" />
-    <None Include="data\shader\Light.vert" />
+    <None Include="data\shader\BasicPhong.frag" />
+    <None Include="data\shader\BasicPhong.vert" />
+    <None Include="data\shader\FlatColor.frag" />
+    <None Include="data\shader\FlatColor.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

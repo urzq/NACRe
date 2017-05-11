@@ -22,9 +22,6 @@
     <ClCompile Include="src\Shader\ShaderProgramManager.cpp">
       <Filter>src\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="src\Cube\Cube.cpp">
-      <Filter>src\Cube</Filter>
-    </ClCompile>
     <ClCompile Include="src\Graphics\Transform.cpp">
       <Filter>src\Graphics</Filter>
     </ClCompile>
@@ -45,6 +42,12 @@
     </ClCompile>
     <ClCompile Include="src\Core\ServiceLocator.cpp">
       <Filter>src\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\Cube.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\WhiteCube.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,9 +72,6 @@
     <ClInclude Include="src\Shader\ShaderProgramManager.h">
       <Filter>src\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cube\Cube.h">
-      <Filter>src\Cube</Filter>
-    </ClInclude>
     <ClInclude Include="src\Graphics\Transform.h">
       <Filter>src\Graphics</Filter>
     </ClInclude>
@@ -93,6 +93,12 @@
     <ClInclude Include="src\Core\ServiceLocator.h">
       <Filter>src\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\Scene\Cube.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\WhiteCube.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -107,9 +113,6 @@
     <Filter Include="src\Shader">
       <UniqueIdentifier>{d392d161-96f5-4d5c-a2e2-334e5c6e15bd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Cube">
-      <UniqueIdentifier>{cc924c83-c878-4b6c-9613-ac6d6402780a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Core">
       <UniqueIdentifier>{bf248384-b9a1-4fa8-8a3e-1226ca47ef4f}</UniqueIdentifier>
     </Filter>
@@ -119,18 +122,21 @@
     <Filter Include="src\Graphics">
       <UniqueIdentifier>{22206e7c-7bc2-4f43-b806-866a37eb7d80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{cc924c83-c878-4b6c-9613-ac6d6402780a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="data\shader\Light.frag">
+    <None Include="data\shader\BasicPhong.frag">
       <Filter>data\Shader</Filter>
     </None>
-    <None Include="data\shader\Light.vert">
+    <None Include="data\shader\BasicPhong.vert">
       <Filter>data\Shader</Filter>
     </None>
-    <None Include="data\shader\Cube.vert">
+    <None Include="data\shader\FlatColor.frag">
       <Filter>data\Shader</Filter>
     </None>
-    <None Include="data\shader\Cube.frag">
+    <None Include="data\shader\FlatColor.vert">
       <Filter>data\Shader</Filter>
     </None>
   </ItemGroup>

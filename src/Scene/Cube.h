@@ -11,7 +11,7 @@ public:
 	Cube(float initTime);
 	Cube(const Cube& other) = delete;
 	Cube(Cube&& other);
-	Cube& operator=(Cube&& other);
+	Cube& operator=(Cube&& other) = delete;
 	~Cube();
 	
 	void SetStartPosition(const glm::vec3& startPosition);

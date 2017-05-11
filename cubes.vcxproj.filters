@@ -69,7 +69,6 @@
     <ClInclude Include="src\core\Color.h">
       <Filter>src\color</Filter>
     </ClInclude>
-    <ClInclude Include="src\par_shapes.h" />
     <ClInclude Include="src\mesh\VertexBuffer.h">
       <Filter>src\mesh</Filter>
     </ClInclude>

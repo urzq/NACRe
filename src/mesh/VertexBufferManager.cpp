@@ -3,7 +3,7 @@
 #include <functional>
 
 #define PAR_SHAPES_IMPLEMENTATION
-#include "par_shapes.h"
+#include <grasshoper/par_shapes.h>
 
 #include "VertexBuffer.h"
 #include "VertexBufferData.h"

@@ -1,11 +1,12 @@
 #ifndef __VERTEX_BUFFER_MANAGER_H__
 #define __VERTEX_BUFFER_MANAGER_H__
 
-#include <GL/glew.h>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 
-#include "par_shapes.h"
+#include <GL/glew.h>
+
+#include <grasshoper/par_shapes.h>
 
 class VertexBuffer;
 

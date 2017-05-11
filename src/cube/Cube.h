@@ -3,32 +3,27 @@
 
 #include <glm/glm.hpp>
 
-class Program;
+class Renderable;
 
 class Cube
 {
 public:
-	Cube(const Program& program, float initTime);
+	Cube(float initTime);
+	Cube(const Cube& other) = delete;
+	Cube(Cube&& other);
+	Cube& operator=(Cube&& other);
+	~Cube();
 	
-	void Update(float dT);
-	void Render(const glm::mat4& projection, const glm::mat4& view);
-
-	void SetPosition(const glm::vec3& position);
+	void SetStartPosition(const glm::vec3& startPosition);
 	void SetColor(const glm::vec3& color);
 
-private:
-	glm::mat4 GetModel() const;
+	void Update(float dT);
 
 private:
-	glm::vec3 m_Position;
-	glm::vec3 m_Scale;
+	Renderable* m_Renderable;
+
+	glm::vec3 m_StartPosition;
 	glm::vec3 m_OffsetPosition;
-	glm::vec3 m_ObjectColor;
-
-	GLuint m_ObjectColorLoc;
-	GLuint m_ModelLoc;
-	GLuint m_ViewLoc;
-	GLuint m_ProjLoc;
 
 	float m_TotalTime;
 };

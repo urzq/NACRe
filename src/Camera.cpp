@@ -1,16 +1,19 @@
 #include <iostream>
 
+#include <GL/glew.h>
 #include <glfw3.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "ServiceLocator.h"
+#include "Renderer.h"
+
 #include "Camera.h"
 
 using namespace glm;
 
-Camera::Camera(GLFWwindow* window):
-	m_Window(window)
+Camera::Camera()
 {
 }
 
@@ -32,12 +35,14 @@ glm::vec3 Camera::GetPosition() const
 
 void Camera::Update(float dT)
 {
+	GLFWwindow* window = ServiceLocator::GetInstance()->GetRenderer()->GetGLFWwindow();
+
 	// Get mouse position
 	double xpos, ypos;
-	glfwGetCursorPos(m_Window, &xpos, &ypos);
+	glfwGetCursorPos(window, &xpos, &ypos);
 
 	// Reset mouse position for next frame
-	glfwSetCursorPos(m_Window, 1024/2, 768/2);
+	glfwSetCursorPos(window, 1024/2, 768/2);
 
 	// Compute new orientation
 	m_HorizontalAngle += m_MouseSpeed * float(1024/2 - xpos );
@@ -61,23 +66,23 @@ void Camera::Update(float dT)
 	glm::vec3 up = glm::cross( right, direction );
 
 	// Move forward
-	if (glfwGetKey( m_Window, GLFW_KEY_UP ) == GLFW_PRESS){
+	if (glfwGetKey(window, GLFW_KEY_UP ) == GLFW_PRESS){
 		m_Position += direction * dT* m_Speed;
 	}
 	// Move backward
-	if (glfwGetKey(m_Window, GLFW_KEY_DOWN ) == GLFW_PRESS){
+	if (glfwGetKey(window, GLFW_KEY_DOWN ) == GLFW_PRESS){
 		m_Position -= direction * dT * m_Speed;
 	}
 	// Strafe right
-	if (glfwGetKey(m_Window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
+	if (glfwGetKey(window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
 		m_Position += right * dT * m_Speed;
 	}
 	// Strafe left
-	if (glfwGetKey(m_Window, GLFW_KEY_LEFT ) == GLFW_PRESS){
+	if (glfwGetKey(window, GLFW_KEY_LEFT ) == GLFW_PRESS){
 		m_Position -= right * dT * m_Speed;
 	}
 
-	if (glfwGetKey(m_Window, GLFW_KEY_SPACE) == GLFW_PRESS)
+	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
 		std::cout << m_HorizontalAngle << " " << m_VerticalAngle <<  "\n";
 		std::cout << m_Position.x << " " << m_Position.y << " " << m_Position.z << "\n";

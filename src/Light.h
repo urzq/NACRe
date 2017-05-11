@@ -1,27 +1,34 @@
 #ifndef __LIGHT_H__
 #define __LIGHT_H__
 
+#include <GL/glew.h>
 #include <glm/glm.hpp>
 
-class Program;
+class ShaderProgram;
 
 class Light
 {
+	friend class Renderer;
+
 public:
-	Light(int matrixID);
-	
-	void Update(float dT);
-	void Render(const glm::mat4& projection, const glm::mat4& view);
-	glm::vec3 GetPosition() const;
+	Light();
+	~Light();
+
+	void SetParameters(const glm::vec3& lightPos, const glm::vec3& camPos, const glm::vec3& lightColor);
 
 private:
-	glm::vec3 m_Position;
-	glm::vec3 m_Rotation;
-	glm::vec3 m_Scale;
+	void SetShaderProgram(ShaderProgram* shaderProgram);
 
-	const float m_Radius;
-	GLuint m_MatrixID;
-	float m_TotalTime;
+private:
+	GLuint m_LightColorLoc;
+	GLuint m_LightPosLoc;
+	GLuint m_ViewPosLoc;
+
+	glm::vec3 m_LightPos;
+	glm::vec3 m_CamPos;
+	glm::vec3 m_LightColor;
+
+	ShaderProgram* m_ShaderProgram;
 };
 
 #endif

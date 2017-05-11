@@ -3,53 +3,53 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Cube.h"
-#include "shader/Program.h"
+#include "shader/ShaderProgram.h"
+#include "ServiceLocator.h"
 
-Cube::Cube(const Program& program, float initTime):
-	m_TotalTime(initTime),
-	m_Position(0, 0, 0),
-	m_Scale(0.7f),
-	m_ObjectColor(1.0f, 1.0f, 0.3f)
+#include "Renderer.h"
+#include "Renderable.h"
+
+Cube::Cube(float initTime) :
+	m_TotalTime(initTime)
 {
-	m_ObjectColorLoc = program.GetUniformLocation("objectColor");
-	m_ModelLoc = program.GetUniformLocation("model");
-	m_ViewLoc = program.GetUniformLocation("view");
-	m_ProjLoc = program.GetUniformLocation("projection");
+	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
+	m_Renderable = renderer->CreateRenderable("sphere", "Cube.vert", "Cube.frag");
+
+	m_OffsetPosition = glm::vec3(0, 0, 0);
 }
 
-void Cube::SetPosition(const glm::vec3& position)
+Cube::Cube(Cube&& other)
 {
-	m_Position = position;
+	this->m_Renderable = other.m_Renderable;
+	other.m_Renderable = nullptr;
+
+	this->m_StartPosition = other.m_StartPosition;
+	this->m_OffsetPosition = other.m_OffsetPosition;
+
+	this->m_TotalTime = other.m_TotalTime;
+}
+
+Cube::~Cube()
+{
+	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
+	renderer->DestroyRenderable(m_Renderable);
+}
+
+void Cube::SetStartPosition(const glm::vec3& startPosition)
+{
+	m_StartPosition = startPosition;
 }
 
 void Cube::SetColor(const glm::vec3& color)
 {
-	m_ObjectColor = color;
+	m_Renderable->SetColor(color);
 }
 
 void Cube::Update(float dT)
 {
 	m_TotalTime += dT;
 	m_OffsetPosition.z = sin(m_TotalTime);
+
+	m_Renderable->GetTransform().SetPosition(m_StartPosition + m_OffsetPosition);
 }
 
-void Cube::Render(const glm::mat4& projection, const glm::mat4& view)
-{
-	glUniform3f(m_ObjectColorLoc, m_ObjectColor.x, m_ObjectColor.y, m_ObjectColor.z);
-
-	// Pass the matrices to the shader
-	glUniformMatrix4fv(m_ViewLoc, 1, GL_FALSE, glm::value_ptr(view));
-	glUniformMatrix4fv(m_ProjLoc, 1, GL_FALSE, glm::value_ptr(projection));
-	glUniformMatrix4fv(m_ModelLoc, 1, GL_FALSE, glm::value_ptr(GetModel()));
-	
-	// Draw the container (using container's vertex attributes)
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-}
-
-glm::mat4 Cube::GetModel() const
-{
-	glm::mat4 model = glm::translate(glm::mat4(1.0f), m_Position + m_OffsetPosition);
-	model = glm::scale(model, m_Scale);
-
-	return model;
-}

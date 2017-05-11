@@ -1,41 +1,36 @@
-#include <GL/glew.h>
-#include <glm/gtc/matrix_transform.hpp>
-
 #include "Light.h"
-#include "shader/Program.h"
+#include "shader/ShaderProgram.h"
 
-Light::Light(int matrixID):
-	m_MatrixID(matrixID),
-	m_TotalTime(0),
-	m_Radius(2),
-	m_Scale(0.7f)
+Light::Light() :
+	m_ShaderProgram(nullptr)
 {
+
 }
 
-void Light::Update(float dT)
+Light::~Light()
 {
-	m_TotalTime += dT;
 
-	float x = cos(m_TotalTime) * m_Radius;
-	float y = sin(m_TotalTime) * m_Radius;
-	float z = 5.0f;
-
-	m_Position = glm::vec3(x, y, z);
 }
 
-void Light::Render(const glm::mat4& projection, const glm::mat4& view)
+void Light::SetParameters(const glm::vec3& lightPos, const glm::vec3& camPos, const glm::vec3& lightColor)
 {
-	glm::mat4 model = glm::translate(glm::mat4(1.0f), m_Position);
-	model = glm::scale(model, m_Scale);
-	glm::mat4 MVP = projection * view * model;
-
-	// Send our transformation to the currently bound shader, in the "MVP" uniform
-	glUniformMatrix4fv(m_MatrixID, 1, GL_FALSE, &MVP[0][0]);
-
-	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12 * 3 indices starting at 0 -> 12 triangles
+	m_LightPos = lightPos;
+	m_CamPos = camPos;
+	m_LightColor = lightColor;
 }
 
-glm::vec3 Light::GetPosition() const
+void Light::SetShaderProgram(ShaderProgram* shaderProgram)
 {
-	return m_Position;
+	if (m_ShaderProgram != shaderProgram)
+	{
+		m_LightColorLoc = shaderProgram->GetUniformLocation("lightColor");
+		glUniform3f(m_LightColorLoc, m_LightColor.x, m_LightColor.y, m_LightColor.z);
+
+		m_LightPosLoc = shaderProgram->GetUniformLocation("lightPos");
+		glUniform3f(m_LightPosLoc, m_LightPos.x, m_LightPos.y, m_LightPos.z);
+
+		m_ViewPosLoc = shaderProgram->GetUniformLocation("viewPos");
+		glUniform3f(m_ViewPosLoc, m_CamPos.x, m_CamPos.y, m_CamPos.z);
+
+	}
 }

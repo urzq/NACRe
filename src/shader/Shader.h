@@ -10,14 +10,14 @@
 class Shader
 {
 public:
-	Shader(int shaderType, const char* filename);
+	Shader(int shaderType, const std::string& filename);
 	~Shader();
 
 	GLuint GetShaderID() const;
 
 private:
-	std::string GetShaderCode(const char* filename) const;
-	void CompileShaderCode(const char* shaderCode) const;
+	std::string GetShaderCode(const std::string& filename) const;
+	void CompileShaderCode(const std::string& shaderCode) const;
 
 private:
 	GLuint m_ShaderID;

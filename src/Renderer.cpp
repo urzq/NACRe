@@ -1,13 +1,28 @@
 #include <iostream>
 #include <exception>
-
+#include <algorithm>
 #include <GL/glew.h>
 #include <glfw3.h>
 
+#include "shader/ShaderProgram.h"
+#include "mesh/VertexBuffer.h"
+
+#include "Renderable.h"
 #include "Renderer.h"
 
-Renderer::Renderer(const char* windowName, glm::uvec2 windowSize) :
-	m_Window(nullptr)
+Renderer::Renderer() :
+	m_Window(nullptr),
+	m_CurrentVertexBuffer(nullptr),
+	m_CurrentShaderProgram(nullptr)
+{
+}
+
+Renderer::~Renderer()
+{
+	glfwTerminate();
+}
+
+void Renderer::Init(const char* windowName, glm::uvec2 windowSize)
 {
 	if (!glfwInit())
 	{
@@ -57,12 +72,6 @@ Renderer::Renderer(const char* windowName, glm::uvec2 windowSize) :
 	glDepthFunc(GL_LESS);
 }
 
-Renderer::~Renderer()
-{
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
-}
-
 void Renderer::SetClearColor(glm::vec3 clearColor)
 {
 	glClearColor(clearColor.x, clearColor.y, clearColor.z, 0.0f);
@@ -75,8 +84,43 @@ bool Renderer::IsRunning()
 		glfwWindowShouldClose(m_Window) == 0;
 }
 
-void Renderer::Render()
+void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
 {
+	if (m_CurrentShaderProgram)
+	{
+		m_CurrentShaderProgram->SetProjection(projection);
+		m_CurrentShaderProgram->SetView(view);
+	}
+
+	for (Renderable* renderable : m_Renderables)
+	{
+		if (renderable->GetShaderProgram() != m_CurrentShaderProgram)
+		{
+			m_CurrentShaderProgram = renderable->GetShaderProgram();
+			m_CurrentShaderProgram->Use();
+			
+			m_CurrentShaderProgram->SetProjection(projection);
+			m_CurrentShaderProgram->SetView(view);
+
+			m_Light.SetShaderProgram(m_CurrentShaderProgram);
+		}
+		
+		if (renderable->GetVertexBuffer() != m_CurrentVertexBuffer)
+		{
+			m_CurrentVertexBuffer = renderable->GetVertexBuffer();
+			m_CurrentVertexBuffer->Use();
+		}
+
+		glm::mat4 transform = renderable->GetTransform().GetMatrix();
+		m_CurrentShaderProgram->SetModel(transform);
+
+		glm::vec3 color = renderable->GetColor();
+		m_CurrentShaderProgram->SetColor(color);
+
+		int nbVertice = m_CurrentVertexBuffer->GetNbVertice();
+		glDrawArrays(GL_TRIANGLES, 0, nbVertice);
+	}
+
 	// Swap buffers
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
@@ -88,4 +132,23 @@ void Renderer::Render()
 GLFWwindow* Renderer::GetGLFWwindow() const
 {
 	return m_Window;
+}
+
+Light& Renderer::GetLight()
+{
+	return m_Light;
+}
+
+Renderable* Renderer::CreateRenderable(const std::string& meshName, const std::string& vertexFilePath, const std::string& fragmentFilePath)
+{
+	auto renderable = new Renderable(meshName, vertexFilePath, fragmentFilePath);
+	m_Renderables.push_back(renderable);
+	
+	return renderable;
+}
+
+void Renderer::DestroyRenderable(Renderable* renderable)
+{
+	m_Renderables.erase(std::remove(m_Renderables.begin(), m_Renderables.end(), renderable), m_Renderables.end());
+	delete renderable;
 }

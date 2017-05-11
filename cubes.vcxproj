@@ -91,7 +91,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -123,7 +123,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -158,27 +158,35 @@
     <ClCompile Include="src\Clock.cpp" />
     <ClCompile Include="src\core\Color.cpp" />
     <ClCompile Include="src\cube\Cube.cpp" />
-    <ClCompile Include="src\cube\CubePreRender.cpp" />
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\mesh\MeshLight.cpp" />
-    <ClCompile Include="src\mesh\MeshCube.cpp" />
+    <ClCompile Include="src\mesh\VertexBuffer.cpp" />
+    <ClCompile Include="src\mesh\VertexBufferManager.cpp" />
+    <ClCompile Include="src\Renderable.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\shader\Program.cpp" />
+    <ClCompile Include="src\ServiceLocator.cpp" />
     <ClCompile Include="src\shader\Shader.cpp" />
+    <ClCompile Include="src\shader\ShaderProgram.cpp" />
+    <ClCompile Include="src\shader\ShaderProgramManager.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Clock.h" />
     <ClInclude Include="src\core\Color.h" />
     <ClInclude Include="src\cube\Cube.h" />
-    <ClInclude Include="src\cube\CubePreRender.h" />
     <ClInclude Include="src\Light.h" />
-    <ClInclude Include="src\mesh\MeshLight.h" />
-    <ClInclude Include="src\mesh\MeshCube.h" />
+    <ClInclude Include="src\mesh\VertexBuffer.h" />
+    <ClInclude Include="src\mesh\VertexBufferData.h" />
+    <ClInclude Include="src\mesh\VertexBufferManager.h" />
+    <ClInclude Include="src\par_shapes.h" />
+    <ClInclude Include="src\Renderable.h" />
     <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\shader\Program.h" />
+    <ClInclude Include="src\ServiceLocator.h" />
     <ClInclude Include="src\shader\Shader.h" />
+    <ClInclude Include="src\shader\ShaderProgram.h" />
+    <ClInclude Include="src\shader\ShaderProgramManager.h" />
+    <ClInclude Include="src\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\shader\Cube.frag" />

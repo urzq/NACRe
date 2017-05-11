@@ -5,7 +5,7 @@
 
 #include "Shader.h"
 
-Shader::Shader(int shaderType, const char* filename)
+Shader::Shader(int shaderType, const std::string& filename)
 {
 	m_ShaderID = glCreateShader(shaderType);
 	
@@ -23,10 +23,9 @@ GLuint Shader::GetShaderID() const
 	return m_ShaderID;
 }
 
-std::string Shader::GetShaderCode(const char* c_filename) const
+std::string Shader::GetShaderCode(const std::string& filename) const
 {
-	std::string filename = std::string("data/shader/") + c_filename;
-	std::ifstream shaderStream(filename, std::ios::in);
+	std::ifstream shaderStream("data/shader/" + filename, std::ios::in);
 
 	if (! shaderStream.is_open())
 	{
@@ -43,12 +42,12 @@ std::string Shader::GetShaderCode(const char* c_filename) const
 	return shaderCode;
 }
 
-void Shader::CompileShaderCode(const char* shaderCode) const
+void Shader::CompileShaderCode(const std::string& shaderCode) const
 {
 	GLint result = GL_FALSE;
 	int infoLogLength;
 
-	char const * codePointer = shaderCode;
+	const char* codePointer = shaderCode.c_str();
 	glShaderSource(m_ShaderID, 1, &codePointer, NULL);
 	glCompileShader(m_ShaderID);
 

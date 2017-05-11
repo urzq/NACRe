@@ -4,7 +4,10 @@
 layout(location = 0) in vec3 vertexPosition_modelspace;
 
 // Values that stay constant for the whole mesh.
-uniform mat4 MVP;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
 
 void main()
 {	

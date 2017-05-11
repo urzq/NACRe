@@ -59,6 +59,26 @@ VertexBuffer* VertexBufferManager::CreateVertexBuffer(const std::string& meshNam
 		auto sphere = MakeUniqueMesh(par_shapes_create_subdivided_sphere(5) );
 		return CreateVertexBuffer(sphere.get());
 	}
+	else if (meshName == "dodecahedron")
+	{
+		auto dodecahedron = MakeUniqueMesh(par_shapes_create_dodecahedron());
+		return CreateVertexBuffer(dodecahedron.get());
+	}
+	else if (meshName == "tetrahedron")
+	{
+		auto dodecahedron = MakeUniqueMesh(par_shapes_create_tetrahedron());
+		return CreateVertexBuffer(dodecahedron.get());
+	}
+	else if (meshName == "octahedron")
+	{
+		auto octohedron = MakeUniqueMesh(par_shapes_create_octahedron());
+		return CreateVertexBuffer(octohedron.get());
+	}
+	else if (meshName == "icosahedron")
+	{
+		auto octohedron = MakeUniqueMesh(par_shapes_create_icosahedron());
+		return CreateVertexBuffer(octohedron.get());
+	}
 
 	assert(false);
 	return nullptr;

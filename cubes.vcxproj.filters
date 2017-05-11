@@ -43,10 +43,10 @@
     <ClCompile Include="src\Core\ServiceLocator.cpp">
       <Filter>src\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\Cube.cpp">
+    <ClCompile Include="src\Scene\WhiteCube.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\WhiteCube.cpp">
+    <ClCompile Include="src\Scene\SceneNode.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,10 +93,10 @@
     <ClInclude Include="src\Core\ServiceLocator.h">
       <Filter>src\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\Cube.h">
+    <ClInclude Include="src\Scene\WhiteCube.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\WhiteCube.h">
+    <ClInclude Include="src\Scene\SceneNode.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>

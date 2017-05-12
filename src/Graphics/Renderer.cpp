@@ -1,8 +1,12 @@
 #include <iostream>
 #include <exception>
 #include <algorithm>
+
 #include <GL/glew.h>
 #include <glfw3.h>
+
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_glfw_gl3.h>
 
 #include "Shader/ShaderProgram.h"
 #include "VertexBuffer/VertexBuffer.h"
@@ -13,7 +17,9 @@
 Renderer::Renderer() :
 	m_Window(nullptr),
 	m_CurrentVertexBuffer(nullptr),
-	m_CurrentShaderProgram(nullptr)
+	m_CurrentShaderProgram(nullptr),
+	m_ImGuiActivated(false),
+	m_GraveAccentPressed(false)
 {
 }
 
@@ -43,6 +49,8 @@ void Renderer::Init(const char* windowName, glm::uvec2 windowSize)
 		glfwTerminate();
 		throw std::exception("Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible");
 	}
+
+	ImGui_ImplGlfwGL3_Init(m_Window, true);
 
 	glfwMakeContextCurrent(m_Window);
 
@@ -77,39 +85,53 @@ void Renderer::SetClearColor(glm::vec3 clearColor)
 	glClearColor(clearColor.x, clearColor.y, clearColor.z, 0.0f);
 }
 
-bool Renderer::IsRunning()
+bool Renderer::IsRunning() const
 {
 	// Check if the ESC key was pressed or the window was closed
 	return glfwGetKey(m_Window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(m_Window) == 0;
 }
 
-void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
+bool Renderer::IsImGuiActivated() const
 {
-	if (m_CurrentShaderProgram)
+	return m_ImGuiActivated;
+}
+
+void Renderer::NewFrame()
+{
+	glfwPollEvents();
+
+	// TODO: input manager. This is ugly.
+	if ( !m_GraveAccentPressed && glfwGetKey(m_Window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS )
 	{
-		m_CurrentShaderProgram->SetProjection(projection);
-		m_CurrentShaderProgram->SetView(view);
+		m_ImGuiActivated = !m_ImGuiActivated;
+		m_GraveAccentPressed = true;
+		std::cout << "coucuo\n";
+
+		auto cursorMode = m_ImGuiActivated ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED;
+		glfwSetInputMode(m_Window, GLFW_CURSOR, cursorMode);
+
+		if (!m_ImGuiActivated)
+		{
+			glfwSetCursorPos(m_Window, 1024 / 2, 768 / 2);
+		}
+	}
+	
+	if (m_GraveAccentPressed && glfwGetKey(m_Window, GLFW_KEY_GRAVE_ACCENT) == GLFW_RELEASE)
+	{
+		m_GraveAccentPressed = false;
 	}
 
+	ImGui_ImplGlfwGL3_NewFrame();
+}
+
+void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
+{
+	// TODO: sort the renderable vector, to minimize the state change (not really needed now)
 	for (Renderable* renderable : m_Renderables)
 	{
-		if (renderable->GetShaderProgram() != m_CurrentShaderProgram)
-		{
-			m_CurrentShaderProgram = renderable->GetShaderProgram();
-			m_CurrentShaderProgram->Use();
-			
-			m_CurrentShaderProgram->SetProjection(projection);
-			m_CurrentShaderProgram->SetView(view);
-
-			m_Light.SetShaderProgram(m_CurrentShaderProgram);
-		}
-		
-		if (renderable->GetVertexBuffer() != m_CurrentVertexBuffer)
-		{
-			m_CurrentVertexBuffer = renderable->GetVertexBuffer();
-			m_CurrentVertexBuffer->Use();
-		}
+		RefreshShader(renderable->GetShaderProgram(), projection, view);
+		RefreshVertexBuffer(renderable->GetVertexBuffer());
 
 		glm::mat4 transform = renderable->GetTransform().GetMatrix();
 		m_CurrentShaderProgram->SetModel(transform);
@@ -121,13 +143,38 @@ void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
 		glDrawArrays(GL_TRIANGLES, 0, nbVertice);
 	}
 
-	// Swap buffers
+	if (m_ImGuiActivated)
+	{
+		ImGui::Render();
+	}
+
 	glfwSwapBuffers(m_Window);
-	glfwPollEvents();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 }
+
+void Renderer::RefreshShader(ShaderProgram* newShader, const glm::mat4& projection, const glm::mat4& view)
+{
+	if (m_CurrentShaderProgram != newShader)
+	{
+		m_CurrentShaderProgram = newShader;
+		m_CurrentShaderProgram->Use();
+		m_Light.SetShaderProgram(newShader);
+
+		m_CurrentShaderProgram->SetProjection(projection);
+		m_CurrentShaderProgram->SetView(view);
+	}
+}
+
+void Renderer::RefreshVertexBuffer(VertexBuffer* newVertexBuffer)
+{
+	if (m_CurrentVertexBuffer = newVertexBuffer)
+	{
+		m_CurrentVertexBuffer = newVertexBuffer;
+		m_CurrentVertexBuffer->Use();
+	}
+}
+
 
 GLFWwindow* Renderer::GetGLFWwindow() const
 {

@@ -154,6 +154,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="externals\imgui\imgui.cpp" />
+    <ClCompile Include="externals\imgui\imgui_demo.cpp" />
+    <ClCompile Include="externals\imgui\imgui_draw.cpp" />
+    <ClCompile Include="externals\imgui\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="src\Core\Clock.cpp" />
     <ClCompile Include="src\core\Color.cpp" />
     <ClCompile Include="src\Core\ServiceLocator.cpp" />
@@ -163,6 +167,7 @@
     <ClCompile Include="src\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\SceneNode.cpp" />
     <ClCompile Include="src\Scene\WhiteCube.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
@@ -172,6 +177,13 @@
     <ClCompile Include="src\VertexBuffer\VertexBufferManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="externals\imgui\imconfig.h" />
+    <ClInclude Include="externals\imgui\imgui.h" />
+    <ClInclude Include="externals\imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="externals\imgui\imgui_internal.h" />
+    <ClInclude Include="externals\imgui\stb_rect_pack.h" />
+    <ClInclude Include="externals\imgui\stb_textedit.h" />
+    <ClInclude Include="externals\imgui\stb_truetype.h" />
     <ClInclude Include="src\Core\Clock.h" />
     <ClInclude Include="src\core\Color.h" />
     <ClInclude Include="src\Core\ServiceLocator.h" />
@@ -180,6 +192,7 @@
     <ClInclude Include="src\Graphics\Renderable.h" />
     <ClInclude Include="src\Graphics\Renderer.h" />
     <ClInclude Include="src\Graphics\Transform.h" />
+    <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneNode.h" />
     <ClInclude Include="src\Scene\WhiteCube.h" />
     <ClInclude Include="src\Shader\Shader.h" />

@@ -18,10 +18,10 @@ private:
 	glm::mat4 m_ViewMatrix;
 	glm::mat4 m_ProjectionMatrix;
 	
-	glm::vec3 m_Position = glm::vec3(3.83f, 0.82f, 6.85f);
+	glm::vec3 m_Position = glm::vec3(3.24f, 0.66f, 5.57f);
 
-	float m_HorizontalAngle = 3.8f;
-	float m_VerticalAngle = -0.11;
+	float m_HorizontalAngle = 3.66f;
+	float m_VerticalAngle = -0.11f;
 	float m_InitialFoV = 45.0f;
 
 	float m_Speed = 3.0f; // 3 units / second

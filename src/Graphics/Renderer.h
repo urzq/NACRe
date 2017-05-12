@@ -24,8 +24,11 @@ public:
 
 	void SetClearColor(glm::vec3 clearColor);
 
+	void NewFrame();
 	void Render(const glm::mat4& projection, const glm::mat4& view);
-	bool IsRunning();
+	
+	bool IsRunning() const;
+	bool IsImGuiActivated() const;
 
 	Renderable* CreateRenderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram);
 	void DestroyRenderable(Renderable* renderable);
@@ -35,7 +38,14 @@ public:
 	Light& GetLight();
 
 private:
+	void RefreshShader(ShaderProgram* newShader, const glm::mat4& projection, const glm::mat4& view);
+	void RefreshVertexBuffer(VertexBuffer* newVertexBuffer);
+
+private:
 	GLFWwindow* m_Window;
+
+	bool m_ImGuiActivated;
+	bool m_GraveAccentPressed;
 
 	std::vector<Renderable*> m_Renderables;
 	

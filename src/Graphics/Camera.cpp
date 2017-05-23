@@ -11,10 +11,13 @@
 #include "Graphics/Renderer.h"
 #include "Graphics/Camera.h"
 
+#include "Input/InputManager.h"
+
 using namespace glm;
 
 Camera::Camera()
 {
+	m_IsEnabled = true;
 }
 
 glm::mat4 Camera::GetViewMatrix() const
@@ -32,9 +35,19 @@ glm::vec3 Camera::GetPosition() const
 	return m_Position;
 }
 
+void Camera::SetEnabled(bool enabled)
+{
+	m_IsEnabled = enabled;
+}
 
 void Camera::Update(float dT)
 {
+	if (!m_IsEnabled)
+	{
+		return;
+	}
+
+	// TODO: abstract those call in InputManager.
 	GLFWwindow* window = ServiceLocator::GetInstance()->GetRenderer()->GetGLFWwindow();
 
 	// Get mouse position
@@ -65,27 +78,23 @@ void Camera::Update(float dT)
 	// Up vector
 	glm::vec3 up = glm::cross( right, direction );
 
+	auto inputManager = ServiceLocator::GetInstance()->GetInputManager();
+
 	// Move forward
-	if (glfwGetKey(window, GLFW_KEY_UP ) == GLFW_PRESS){
+	if (inputManager->IsKeyDown(GLFW_KEY_UP)){
 		m_Position += direction * dT* m_Speed;
 	}
 	// Move backward
-	if (glfwGetKey(window, GLFW_KEY_DOWN ) == GLFW_PRESS){
+	if (inputManager->IsKeyDown(GLFW_KEY_DOWN)) {
 		m_Position -= direction * dT * m_Speed;
 	}
 	// Strafe right
-	if (glfwGetKey(window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
+	if (inputManager->IsKeyDown(GLFW_KEY_RIGHT)) {
 		m_Position += right * dT * m_Speed;
 	}
 	// Strafe left
-	if (glfwGetKey(window, GLFW_KEY_LEFT ) == GLFW_PRESS){
+	if (inputManager->IsKeyDown(GLFW_KEY_LEFT)) {
 		m_Position -= right * dT * m_Speed;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-	{
-		std::cout << m_HorizontalAngle << " " << m_VerticalAngle <<  "\n";
-		std::cout << m_Position.x << " " << m_Position.y << " " << m_Position.z << "\n";
 	}
 
 	float FoV = m_InitialFoV;

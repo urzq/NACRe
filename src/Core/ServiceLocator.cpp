@@ -1,7 +1,7 @@
 #include "Graphics/Renderer.h"
 #include "VertexBuffer/VertexBufferManager.h"
 #include "Shader/ShaderProgramManager.h"
-
+#include "Input/InputManager.h"
 #include "ServiceLocator.h"
 
 ServiceLocator* ServiceLocator::s_Instance = nullptr;
@@ -27,6 +27,7 @@ ServiceLocator::ServiceLocator()
 	m_Renderer = new Renderer();
 	m_VertexBuferManager = new VertexBufferManager();
 	m_ShaderProgramManager = new ShaderProgramManager();
+	m_InputManager = new InputManager();
 }
 
 ServiceLocator::~ServiceLocator()
@@ -34,6 +35,7 @@ ServiceLocator::~ServiceLocator()
 	delete m_Renderer;
 	delete m_VertexBuferManager;
 	delete m_ShaderProgramManager;
+	delete m_InputManager;
 }
 
 Renderer* ServiceLocator::GetRenderer()
@@ -49,4 +51,9 @@ VertexBufferManager* ServiceLocator::GetVertexBuferManager()
 ShaderProgramManager* ServiceLocator::GetShaderProgramManager()
 {
 	return m_ShaderProgramManager;
+}
+
+InputManager* ServiceLocator::GetInputManager()
+{
+	return m_InputManager;
 }

@@ -1,9 +1,11 @@
 #include <vector>
+#include <iostream>
 
 #include "Graphics/Renderer.h"
 #include "Graphics/Light.h"
 #include "Graphics/Camera.h"
 
+#include "Input/InputManager.h"
 #include "Shader/ShaderProgram.h"
 
 #include "Core/Clock.h"
@@ -14,11 +16,10 @@
 #include "Scene/WhiteCube.h"
 
 /* TODO LIST:
+	Textured cube !
 	Find a cool name.
-	Implement an Input manager (key, mouse).
-	Handle the activation / deactivation of imgui in a better way.
-	LUA ?
 	Handle all the TODO left in the code.
+	Skybox
 	Template the ServiceLocator : ServiceLocator.Get<Renderer>();
 	Create a templated ResourceCache (cf. Urho3D)
 	Improve the Node system. 
@@ -27,12 +28,12 @@
 	Gameobject Picker + manipulation (like Unity scene with arrows).
 	Try to understand shadows.
 	Dynamic number of lights.
-	Textured cube !
 	Material system.
 	Get rid of the STL (?)  At least develop a hash string.
 	Terrain system.
-	Skybox
 	Have a clean separation between the engine and the game (lib).
+	Render to texture, multipass, bloom.
+
 */
 
 int main()
@@ -43,22 +44,29 @@ int main()
 	renderer->Init("Cubes", glm::uvec2(1024, 768));
 	renderer->SetClearColor(Color(0x84A5FF));
 
+	InputManager* inputManager = ServiceLocator::GetInstance()->GetInputManager();
+	inputManager->Init();
+
 	Clock clock;
 	Camera camera;
 	Scene scene;
 
 	WhiteCube cubeLight;
 
-	while (renderer->IsRunning())
+	while (renderer->IsRunning() && ! inputManager->IsKeyDown(GLFW_KEY_ESCAPE) )
 	{
 		clock.Update();
 
 		renderer->NewFrame();
+		inputManager->Update();
 
-		if (! renderer->IsImGuiActivated())
+		if ( inputManager->IsKeyPressed(GLFW_KEY_GRAVE_ACCENT) )
 		{
-			camera.Update(clock.dT());
+			renderer->ToggleImGuiEnabled();
+			camera.SetEnabled( ! renderer->IsImGuiEnabled());
 		}
+
+		camera.Update(clock.dT());
 
 		scene.Update(clock.dT());
 

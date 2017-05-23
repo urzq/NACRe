@@ -4,6 +4,7 @@
 class Renderer;
 class VertexBufferManager;
 class ShaderProgramManager;
+class InputManager;
 
 class ServiceLocator
 {
@@ -16,6 +17,7 @@ public:
 	Renderer* GetRenderer();
 	VertexBufferManager* GetVertexBuferManager();
 	ShaderProgramManager* GetShaderProgramManager();
+	InputManager* GetInputManager();
 
 private:
 	ServiceLocator();
@@ -31,6 +33,7 @@ private:
 	Renderer* m_Renderer;
 	VertexBufferManager* m_VertexBuferManager;
 	ShaderProgramManager* m_ShaderProgramManager;
+	InputManager* m_InputManager;
 };
 
 #endif

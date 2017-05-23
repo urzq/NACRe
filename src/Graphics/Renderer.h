@@ -1,10 +1,10 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include <vector>
-
 #include <GL/glew.h>
 #include <glfw3.h>
+
+#include <vector>
 
 #include <glm/glm.hpp>
 
@@ -28,7 +28,9 @@ public:
 	void Render(const glm::mat4& projection, const glm::mat4& view);
 	
 	bool IsRunning() const;
-	bool IsImGuiActivated() const;
+
+	void ToggleImGuiEnabled();
+	bool IsImGuiEnabled() const;
 
 	Renderable* CreateRenderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram);
 	void DestroyRenderable(Renderable* renderable);
@@ -43,9 +45,9 @@ private:
 
 private:
 	GLFWwindow* m_Window;
+	glm::vec2 m_WindowSize;
 
-	bool m_ImGuiActivated;
-	bool m_GraveAccentPressed;
+	bool m_ImGuiEnabled;
 
 	std::vector<Renderable*> m_Renderables;
 	

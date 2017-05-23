@@ -2,9 +2,6 @@
 #include <exception>
 #include <algorithm>
 
-#include <GL/glew.h>
-#include <glfw3.h>
-
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_glfw_gl3.h>
 
@@ -18,8 +15,7 @@ Renderer::Renderer() :
 	m_Window(nullptr),
 	m_CurrentVertexBuffer(nullptr),
 	m_CurrentShaderProgram(nullptr),
-	m_ImGuiActivated(false),
-	m_GraveAccentPressed(false)
+	m_ImGuiEnabled(false)
 {
 }
 
@@ -68,7 +64,10 @@ void Renderer::Init(const char* windowName, glm::uvec2 windowSize)
 	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	// Set the mouse at the center of the screen
+	m_WindowSize = windowSize;
 	glfwPollEvents();
+
+	// Todo: move this to input
 	glfwSetCursorPos(m_Window, windowSize.x / 2, windowSize.y / 2);
 
 	// Dark blue background
@@ -87,41 +86,34 @@ void Renderer::SetClearColor(glm::vec3 clearColor)
 
 bool Renderer::IsRunning() const
 {
-	// Check if the ESC key was pressed or the window was closed
-	return glfwGetKey(m_Window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-		glfwWindowShouldClose(m_Window) == 0;
+	// Check if the window was closed
+	return glfwWindowShouldClose(m_Window) == 0;
 }
 
-bool Renderer::IsImGuiActivated() const
+void Renderer::ToggleImGuiEnabled()
 {
-	return m_ImGuiActivated;
+	m_ImGuiEnabled = ! m_ImGuiEnabled;
+
+	// TODO: somehow, move this to input manager.
+	if (m_ImGuiEnabled)
+	{
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+	else
+	{
+		glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		glfwSetCursorPos(m_Window, m_WindowSize.x / 2, m_WindowSize.y / 2);
+	}
+}
+
+bool Renderer::IsImGuiEnabled() const
+{
+	return m_ImGuiEnabled;
 }
 
 void Renderer::NewFrame()
 {
 	glfwPollEvents();
-
-	// TODO: input manager. This is ugly.
-	if ( !m_GraveAccentPressed && glfwGetKey(m_Window, GLFW_KEY_GRAVE_ACCENT) == GLFW_PRESS )
-	{
-		m_ImGuiActivated = !m_ImGuiActivated;
-		m_GraveAccentPressed = true;
-		std::cout << "coucuo\n";
-
-		auto cursorMode = m_ImGuiActivated ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED;
-		glfwSetInputMode(m_Window, GLFW_CURSOR, cursorMode);
-
-		if (!m_ImGuiActivated)
-		{
-			glfwSetCursorPos(m_Window, 1024 / 2, 768 / 2);
-		}
-	}
-	
-	if (m_GraveAccentPressed && glfwGetKey(m_Window, GLFW_KEY_GRAVE_ACCENT) == GLFW_RELEASE)
-	{
-		m_GraveAccentPressed = false;
-	}
-
 	ImGui_ImplGlfwGL3_NewFrame();
 }
 
@@ -143,7 +135,7 @@ void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
 		glDrawArrays(GL_TRIANGLES, 0, nbVertice);
 	}
 
-	if (m_ImGuiActivated)
+	if (m_ImGuiEnabled)
 	{
 		ImGui::Render();
 	}

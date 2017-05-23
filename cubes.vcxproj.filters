@@ -64,6 +64,9 @@
     <ClCompile Include="src\Scene\Scene.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="src\Input\InputManager.cpp">
+      <Filter>src\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Color.h">
@@ -138,6 +141,9 @@
     <ClInclude Include="src\Scene\Scene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Input\InputManager.h">
+      <Filter>src\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -169,6 +175,9 @@
     </Filter>
     <Filter Include="externals\imgui">
       <UniqueIdentifier>{6e124234-0817-4842-a03c-2999ffdb115d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Input">
+      <UniqueIdentifier>{f947bf5b-0fc7-40fb-9d25-c949e1e40765}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

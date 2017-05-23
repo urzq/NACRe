@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 
+// TODO: separate this between engine and gameplay. (generic vs specific)
 class Camera
 {
 public:
@@ -13,6 +14,8 @@ public:
 	glm::mat4 GetViewMatrix() const;
 	glm::mat4 GetProjectionMatrix() const;
 	glm::vec3 GetPosition() const;
+
+	void SetEnabled(bool enabled);
 
 private:
 	glm::mat4 m_ViewMatrix;
@@ -26,6 +29,8 @@ private:
 
 	float m_Speed = 3.0f; // 3 units / second
 	float m_MouseSpeed = 0.005f;
+
+	bool m_IsEnabled;
 };
 
 #endif

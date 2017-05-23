@@ -166,6 +166,7 @@
     <ClCompile Include="src\Graphics\Renderable.cpp" />
     <ClCompile Include="src\Graphics\Renderer.cpp" />
     <ClCompile Include="src\Graphics\Transform.cpp" />
+    <ClCompile Include="src\Input\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\SceneNode.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="src\Graphics\Renderable.h" />
     <ClInclude Include="src\Graphics\Renderer.h" />
     <ClInclude Include="src\Graphics\Transform.h" />
+    <ClInclude Include="src\Input\InputManager.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneNode.h" />
     <ClInclude Include="src\Scene\WhiteCube.h" />

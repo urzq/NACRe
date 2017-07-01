@@ -13,7 +13,6 @@
 #include "Core/ServiceLocator.h"
 
 #include "Scene/Scene.h"
-#include "Scene/WhiteCube.h"
 
 /* TODO LIST:
 	Textured cube !
@@ -51,7 +50,6 @@ int main()
 	Camera camera;
 	Scene scene;
 
-	WhiteCube cubeLight;
 
 	while (renderer->IsRunning() && ! inputManager->IsKeyDown(GLFW_KEY_ESCAPE) )
 	{
@@ -67,11 +65,7 @@ int main()
 		}
 
 		camera.Update(clock.dT());
-
-		scene.Update(clock.dT());
-
-		cubeLight.Update(clock.dT());
-		renderer->GetLight().SetParameters(cubeLight.GetPosition(), camera.GetPosition(), cubeLight.GetLightColor());
+		scene.Update(clock.dT(), camera.GetPosition());
 
 		renderer->Render(camera.GetProjectionMatrix(), camera.GetViewMatrix());
 	}

@@ -51,7 +51,7 @@ glm::vec3 WhiteCube::GetLightColor()
 	return m_Renderable->GetColor();
 }
 
-void WhiteCube::Update(float dT)
+void WhiteCube::Update(float dT, glm::vec3 cameraPosition)
 {
 	m_TotalTime += dT;
 
@@ -62,5 +62,8 @@ void WhiteCube::Update(float dT)
 	float z = 5.0f;
 
 	m_Renderable->GetTransform().SetPosition({ x, y, z });
+
+	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
+	renderer->GetLight().SetParameters(GetPosition(), cameraPosition, GetLightColor());
 }
 

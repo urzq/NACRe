@@ -18,7 +18,7 @@ public:
 	glm::vec3 GetPosition();
 	glm::vec3 GetLightColor();
 
-	void Update(float dT);
+	void Update(float dT, glm::vec3 cameraPosition);
 
 private:
 	Renderable* m_Renderable;

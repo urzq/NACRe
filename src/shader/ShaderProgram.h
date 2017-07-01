@@ -16,7 +16,7 @@ public:
 	void Disable();
 
 	// TODO: use an optimized string (hashed ? view ?)
-	GLuint GetUniformLocation(const std::string& name);
+	GLint GetUniformLocation(const std::string& name);
 
 	void SetModel(const glm::mat4& model);
 	void SetView(const glm::mat4& view);
@@ -35,7 +35,7 @@ private:
 	GLint m_ObjectColorLoc;
 
 	// All others "exotic" uniforms that may appear in the shader.
-	std::unordered_map<std::string, GLuint> m_UniformLocations;
+	std::unordered_map<std::string, GLint> m_UniformLocations;
 };
 
 #endif

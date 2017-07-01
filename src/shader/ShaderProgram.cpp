@@ -62,7 +62,7 @@ void ShaderProgram::Disable()
 	glUseProgram(0);
 }
 
-GLuint ShaderProgram::GetUniformLocation(const std::string& name)
+GLint ShaderProgram::GetUniformLocation(const std::string& name)
 {
 	auto lower_bound = m_UniformLocations.lower_bound(name);
 
@@ -72,7 +72,7 @@ GLuint ShaderProgram::GetUniformLocation(const std::string& name)
 	}
 	else
 	{
-		GLuint uniform = glGetUniformLocation(m_ProgramID, name.c_str());
+		GLint uniform = glGetUniformLocation(m_ProgramID, name.c_str());
 		m_UniformLocations.insert(lower_bound, { name, uniform });
 		return uniform;
 	}

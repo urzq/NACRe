@@ -33,10 +33,13 @@ Scene::Scene()
 	}
 }
 
-void Scene::Update(float dT)
+void Scene::Update(float dT, glm::vec3 cameraPosition)
 {
 	for (auto& node : m_SceneNodes)
 	{
 		node->Update(dT);
 	}
+
+	m_WhiteCube.Update(dT, cameraPosition);
+
 }

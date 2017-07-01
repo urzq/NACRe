@@ -151,7 +151,7 @@ void Renderer::RefreshShader(ShaderProgram* newShader, const glm::mat4& projecti
 	{
 		m_CurrentShaderProgram = newShader;
 		m_CurrentShaderProgram->Use();
-		m_Light.SetShaderProgram(newShader);
+		m_Light.ApplyParametersToShader(newShader);
 
 		m_CurrentShaderProgram->SetProjection(projection);
 		m_CurrentShaderProgram->SetView(view);
@@ -160,13 +160,12 @@ void Renderer::RefreshShader(ShaderProgram* newShader, const glm::mat4& projecti
 
 void Renderer::RefreshVertexBuffer(VertexBuffer* newVertexBuffer)
 {
-	if (m_CurrentVertexBuffer = newVertexBuffer)
+	if (m_CurrentVertexBuffer != newVertexBuffer)
 	{
 		m_CurrentVertexBuffer = newVertexBuffer;
 		m_CurrentVertexBuffer->Use();
 	}
 }
-
 
 GLFWwindow* Renderer::GetGLFWwindow() const
 {

@@ -21,8 +21,9 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{70120F09-3333-4728-B320-EC93F9DB58A3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>cubes</RootNamespace>
+    <RootNamespace>NACRe</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>NACRe</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

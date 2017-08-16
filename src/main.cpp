@@ -40,7 +40,7 @@ int main()
 	ServiceLocator::Init();
 
 	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
-	renderer->Init("Cubes", glm::uvec2(1024, 768));
+	renderer->Init("NACRe", glm::uvec2(1024, 768));
 	renderer->SetClearColor(Color(0x84A5FF));
 
 	InputManager* inputManager = ServiceLocator::GetInstance()->GetInputManager();

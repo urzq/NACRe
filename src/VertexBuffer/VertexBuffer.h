@@ -25,7 +25,7 @@ private:
 private:
 	GLuint m_VAO;
 
-	GLuint m_VBO_position;
+	GLuint m_VBO_vertices;
 	GLuint m_VBO_normals;
 
 	int m_NbVertices;

@@ -1,26 +1,26 @@
 #ifndef __RENDERABLE_H__
 #define __RENDERABLE_H__
 
+#include <vector>
 #include <string>
+#include <memory>
+
 #include "Transform.h"
 
 class VertexBuffer;
 class ShaderProgram;
+class GLTexture;
 
 class Renderable
 {
 	friend class Renderer;
 
 private:
-	Renderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram);
-	Renderable(const Renderable& other) = delete;
-	Renderable& operator=(const Renderable& other) = delete;
-	Renderable(Renderable&& other) = delete;
-	Renderable& operator=(Renderable&& other) = delete;
-	~Renderable();
+	Renderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures = {});
 
 public:
 	VertexBuffer* GetVertexBuffer();
+	std::vector<GLTexture*>& GetTextures();
 	ShaderProgram* GetShaderProgram();
 	Transform& GetTransform();
 	
@@ -28,7 +28,8 @@ public:
 	void SetColor(const glm::vec3& color);
 
 private:
-	VertexBuffer* m_RefVertexBuffer;
+	std::shared_ptr<VertexBuffer> m_VertexBuffer;
+	std::vector<GLTexture*> m_Textures;
 	ShaderProgram* m_RefShaderProgram;
 	Transform m_Transform;
 

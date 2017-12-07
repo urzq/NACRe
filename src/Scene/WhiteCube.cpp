@@ -18,14 +18,14 @@
 WhiteCube::WhiteCube():
 	m_TotalTime(0.0f)
 {
-	auto vertexBufferManager = ServiceLocator::GetInstance()->GetVertexBuferManager();
-	VertexBuffer* vertexBuffer = vertexBufferManager->GetVertexBuffer("cube");
+	auto vertexBufferManager = ServiceLocator::GetInstance()->GetVertexBufferManager();
+	auto vertexBuffer = vertexBufferManager->GetVertexBuffer("cube");
 
 	auto shaderProgramManager = ServiceLocator::GetInstance()->GetShaderProgramManager();
 	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("FlatColor.vert", "FlatColor.frag");
 
 	auto renderer = ServiceLocator::GetInstance()->GetRenderer();
-	m_Renderable = renderer->CreateRenderable(vertexBuffer, shaderProgram);
+	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram);
 
 	m_Renderable->GetTransform().SetScale({ 0.2f, 0.2f, 0.2f });
 }
@@ -51,7 +51,7 @@ glm::vec3 WhiteCube::GetLightColor()
 	return m_Renderable->GetColor();
 }
 
-void WhiteCube::Update(float dT, glm::vec3 cameraPosition)
+void WhiteCube::Update(float dT)
 {
 	m_TotalTime += dT;
 
@@ -62,8 +62,5 @@ void WhiteCube::Update(float dT, glm::vec3 cameraPosition)
 	float z = 5.0f;
 
 	m_Renderable->GetTransform().SetPosition({ x, y, z });
-
-	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
-	renderer->GetLight().SetParameters(GetPosition(), cameraPosition, GetLightColor());
 }
 

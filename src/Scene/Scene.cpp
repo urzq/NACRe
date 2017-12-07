@@ -1,4 +1,8 @@
+#include "Core/ServiceLocator.h"
 #include "Core/Color.h"
+
+#include "Graphics/Renderer.h"
+
 #include "SceneNode.h"
 #include "Scene.h"
 
@@ -15,7 +19,7 @@ Scene::Scene()
 	NodeDescriptor SceneDescriptor[] =
 	{
 		{ "cube",		  { 1.38, 0.75,-1.13 }, { 1.5, 1.5, 1.5}, 0xF6C4FF },
-		{ "sphere",	      { 0.00, 0.93, 0.00 }, { 1.0, 1.0, 1.0}, 0xC4DCFF },
+		{ "sphere",	      {-1.00, 2.93, 0.00 }, { 1.0, 1.0, 1.0}, 0xC4DCFF },
 		{ "dodecahedron", { 0.98, 0.02, 3.50 }, { 0.7, 0.7, 0.7}, 0x81FF68 },
 		{ "tetrahedron",  {-0.98, 1.42,-0.50 }, { 1.3, 1.3, 1.3}, 0xBAFFC3 },
 		{ "octahedron",   {-1.25, 0.79, 1.79 }, { 1.0, 1.0, 1.0}, 0xE6CEFF },
@@ -40,6 +44,18 @@ void Scene::Update(float dT, glm::vec3 cameraPosition)
 		node->Update(dT);
 	}
 
-	m_WhiteCube.Update(dT, cameraPosition);
+	UpdateLight(dT, cameraPosition);
 
+	m_MinecraftCube.Update(dT);
+}
+
+void Scene::UpdateLight(float dT, glm::vec3 cameraPosition)
+{
+	m_WhiteCube.Update(dT);
+
+	auto renderer = ServiceLocator::GetInstance()->GetRenderer();
+	auto lightPos = m_WhiteCube.GetPosition();
+	auto lightColor = m_WhiteCube.GetLightColor();
+
+	renderer->GetLight().SetParameters(lightPos, cameraPosition, lightColor);
 }

@@ -67,6 +67,15 @@
     <ClCompile Include="src\Input\InputManager.cpp">
       <Filter>src\Input</Filter>
     </ClCompile>
+    <ClCompile Include="src\Texture\TextureManager.cpp">
+      <Filter>src\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture\GLTexture.cpp">
+      <Filter>src\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene\MinecraftCube.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\Color.h">
@@ -144,6 +153,18 @@
     <ClInclude Include="src\Input\InputManager.h">
       <Filter>src\Input</Filter>
     </ClInclude>
+    <ClInclude Include="externals\stb\stb_image.h">
+      <Filter>externals\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture\TextureManager.h">
+      <Filter>src\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture\GLTexture.h">
+      <Filter>src\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scene\MinecraftCube.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -179,6 +200,15 @@
     <Filter Include="src\Input">
       <UniqueIdentifier>{f947bf5b-0fc7-40fb-9d25-c949e1e40765}</UniqueIdentifier>
     </Filter>
+    <Filter Include="externals\stb">
+      <UniqueIdentifier>{3f7fe0a4-71f8-4c36-b8a4-baeb08bfafc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Texture">
+      <UniqueIdentifier>{3c40f841-21c5-492e-8198-f6c32ac0e78d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="data\Texture">
+      <UniqueIdentifier>{8974da41-0b8e-49e8-aa6f-25d8fab6473a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="data\shader\BasicPhong.frag">
@@ -193,5 +223,16 @@
     <None Include="data\shader\FlatColor.vert">
       <Filter>data\Shader</Filter>
     </None>
+    <None Include="data\Shader\BasicDiffuse.frag">
+      <Filter>data\Shader</Filter>
+    </None>
+    <None Include="data\Shader\BasicDiffuse.vert">
+      <Filter>data\Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\Texture\MinecraftCube.png">
+      <Filter>data\Texture</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -18,16 +18,16 @@ ShaderProgram* ShaderProgramManager::GetShaderProgram(const std::string& vertex_
 {
 	std::string name = vertex_file_path + fragment_file_path;
 
-	auto lower_bound = m_ShaderPrograms.lower_bound(name);
+	auto lb = m_ShaderPrograms.lower_bound(name);
 
-	if (lower_bound != m_ShaderPrograms.end() && !(m_ShaderPrograms.key_comp()(name, lower_bound->first)))
+	if (lb != m_ShaderPrograms.end() && !(m_ShaderPrograms.key_comp()(name, lb->first)))
 	{
-		return lower_bound->second;
+		return lb->second;
 	}
 	else
 	{
-		ShaderProgram* shaderProgram = new ShaderProgram(vertex_file_path, fragment_file_path);
-		m_ShaderPrograms.insert(lower_bound, { name, shaderProgram });
+		auto shaderProgram = new ShaderProgram(vertex_file_path, fragment_file_path);
+		m_ShaderPrograms.insert(lb, { name, shaderProgram });
 		return shaderProgram;
 	}
 }

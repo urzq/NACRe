@@ -2,32 +2,30 @@
 #define __VERTEX_BUFFER_MANAGER_H__
 
 #include <string>
+#include <memory>
 #include <unordered_map>
 
 #include <GL/glew.h>
 
-#include <grasshoper/par_shapes.h>
 
 class VertexBuffer;
+struct VertexBufferData;
 
 class VertexBufferManager
 {
 public:
-	VertexBufferManager();
-	VertexBufferManager(const VertexBufferManager& other) = delete;
-	VertexBufferManager& operator=(const VertexBufferManager& other) = delete;
-	VertexBufferManager(VertexBufferManager&& other) = delete;
-	VertexBufferManager& operator=(VertexBufferManager&& other) = delete;
-	~VertexBufferManager();
+	// Returns a cached standard mesh by name (cube, sphere etc...).
+	// /!\ Be extra cautious if one day we clean m_VertexBuffer. Other objets can still have references on a VertexBuffer, and it won't be destroyed properly.
+	std::shared_ptr<VertexBuffer> GetVertexBuffer(const std::string& meshName);
 
-	VertexBuffer* GetVertexBuffer(const std::string& meshName);
+	// Creates a VertexBuffer from a VertexBufferData. 
+	std::shared_ptr<VertexBuffer> CreateVertexBuffer(const VertexBufferData& vbd);
 
 private:
-	VertexBuffer* CreateVertexBuffer(const std::string& meshName);
-	VertexBuffer* CreateVertexBuffer(par_shapes_mesh* mesh);
+	VertexBuffer* NewVertexBuffer(const std::string& meshName);
 
 private:
-	std::unordered_map<std::string, VertexBuffer*> m_VertexBuffers;
+	std::unordered_map<std::string, std::weak_ptr<VertexBuffer>> m_VertexBufferCache;
 };
 
 #endif

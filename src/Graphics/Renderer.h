@@ -1,6 +1,8 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
+#include <memory>
+
 #include <GL/glew.h>
 #include <glfw3.h>
 
@@ -12,6 +14,7 @@
 
 class Renderable;
 class VertexBuffer;
+class GLTexture;
 class ShaderProgram;
 
 class Renderer
@@ -32,7 +35,7 @@ public:
 	void ToggleImGuiEnabled();
 	bool IsImGuiEnabled() const;
 
-	Renderable* CreateRenderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram);
+	Renderable* CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures = {});
 	void DestroyRenderable(Renderable* renderable);
 
 	GLFWwindow* GetGLFWwindow() const;
@@ -42,6 +45,7 @@ public:
 private:
 	void RefreshShader(ShaderProgram* newShader, const glm::mat4& projection, const glm::mat4& view);
 	void RefreshVertexBuffer(VertexBuffer* newVertexBuffer);
+	void RefreshTextures(const std::vector<GLTexture*>& textures);
 
 private:
 	GLFWwindow* m_Window;

@@ -1,7 +1,7 @@
 #include "VertexBufferData.h"
 #include "VertexBuffer.h"
 
-VertexBuffer::VertexBuffer(VertexBufferData& data)
+VertexBuffer::VertexBuffer(const VertexBufferData& data)
 {
 	m_NbVertices = data.NbVertices;
 	int index = 0;
@@ -25,6 +25,16 @@ VertexBuffer::VertexBuffer(VertexBufferData& data)
 		glBindBuffer(GL_ARRAY_BUFFER, m_VBO_normals);
 		glBufferData(GL_ARRAY_BUFFER, data.NbVertices * sizeof(float) * 3, data.Normals, GL_STATIC_DRAW);
 		glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), (GLvoid*)0);
+		glEnableVertexAttribArray(index);
+		index++;
+	}
+
+	if (data.UV)
+	{
+		glGenBuffers(1, &m_VBO_UV);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VBO_UV);
+		glBufferData(GL_ARRAY_BUFFER, data.NbVertices * sizeof(float) * 2, data.UV, GL_STATIC_DRAW);
+		glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GL_FLOAT), (GLvoid*)0);
 		glEnableVertexAttribArray(index);
 		index++;
 	}

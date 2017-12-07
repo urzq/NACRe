@@ -15,24 +15,21 @@
 #include "Scene/Scene.h"
 
 /* TODO LIST:
+	Smarted handling of textures in renderer.cpp
+	Indexes.
+	Easier binding between vertexbuffer and shader (based on name ?)
+	Model loading
+	Material system.
 	Textured cube !
-	Find a cool name.
 	Handle all the TODO left in the code.
-	Skybox
+	Less duplication between minecraftCube, WhiteCube and sceneNode.
 	Template the ServiceLocator : ServiceLocator.Get<Renderer>();
 	Create a templated ResourceCache (cf. Urho3D)
-	Improve the Node system. 
 	Shader hot reload :)
 	Implement more shaders -> Wireframe effect.
-	Gameobject Picker + manipulation (like Unity scene with arrows).
 	Try to understand shadows.
 	Dynamic number of lights.
-	Material system.
-	Get rid of the STL (?)  At least develop a hash string.
-	Terrain system.
 	Have a clean separation between the engine and the game (lib).
-	Render to texture, multipass, bloom.
-
 */
 
 int main()

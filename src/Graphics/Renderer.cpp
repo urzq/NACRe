@@ -7,6 +7,7 @@
 
 #include "Shader/ShaderProgram.h"
 #include "VertexBuffer/VertexBuffer.h"
+#include "Texture/GLTexture.h"
 
 #include "Renderable.h"
 #include "Renderer.h"
@@ -124,6 +125,7 @@ void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
 	{
 		RefreshShader(renderable->GetShaderProgram(), projection, view);
 		RefreshVertexBuffer(renderable->GetVertexBuffer());
+		RefreshTextures(renderable->GetTextures());
 
 		glm::mat4 transform = renderable->GetTransform().GetMatrix();
 		m_CurrentShaderProgram->SetModel(transform);
@@ -167,6 +169,18 @@ void Renderer::RefreshVertexBuffer(VertexBuffer* newVertexBuffer)
 	}
 }
 
+// TODO: do more testing, and see if it can be cached ?
+// si j'ai une texture de bindée, et que je change de shader, est-ce que la texture est toujours bindée correctement ?
+void Renderer::RefreshTextures(const std::vector<GLTexture*>& textures)
+{
+	for (auto i = 0; i < textures.size(); ++i)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+		glBindTexture(GL_TEXTURE_2D, textures[i]->GetTextureID());
+	}
+}
+
+
 GLFWwindow* Renderer::GetGLFWwindow() const
 {
 	return m_Window;
@@ -177,9 +191,9 @@ Light& Renderer::GetLight()
 	return m_Light;
 }
 
-Renderable* Renderer::CreateRenderable(VertexBuffer* refVertexBuffer, ShaderProgram* refShaderProgram)
+Renderable* Renderer::CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures)
 {
-	auto renderable = new Renderable(refVertexBuffer, refShaderProgram);
+	auto renderable = new Renderable(std::move(vertexBuffer), refShaderProgram, std::move(textures));
 	m_Renderables.push_back(renderable);
 	
 	return renderable;

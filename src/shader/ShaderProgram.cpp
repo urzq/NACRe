@@ -45,6 +45,15 @@ ShaderProgram::ShaderProgram(const std::string& vertex_file_path, const std::str
 	assert(m_ProjectionLoc != -1);
 
 	m_ObjectColorLoc = glGetUniformLocation(m_ProgramID, "objectColor");
+
+	// Use the shader before setting uniforms!
+	Use(); 
+
+	// Tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
+	glUniform1i(GetUniformLocation("texture0"), 0);
+	glUniform1i(GetUniformLocation("texture1"), 1);
+	glUniform1i(GetUniformLocation("texture2"), 2);
+	glUniform1i(GetUniformLocation("texture3"), 3);
 }
 
 ShaderProgram::~ShaderProgram()

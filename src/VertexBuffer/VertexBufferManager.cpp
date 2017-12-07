@@ -9,91 +9,80 @@
 #include "VertexBufferData.h"
 #include "VertexBufferManager.h"
 
-VertexBufferManager::VertexBufferManager()
+// Create a par_shapes_mesh from a name ("cube", "sphere"), that knows how to delete itself.
+static std::unique_ptr<par_shapes_mesh, std::function<void(par_shapes_mesh*)>>
+CreateParShapeMesh(const std::string& meshName)
 {
-}
-
-VertexBufferManager::~VertexBufferManager()
-{
-	for (auto& entry : m_VertexBuffers)
-	{
-		delete entry.second;
-	}
-}
-
-VertexBuffer* VertexBufferManager::GetVertexBuffer(const std::string& meshName)
-{
-	auto lower_bound = m_VertexBuffers.lower_bound(meshName);
-
-	if (lower_bound != m_VertexBuffers.end() && !(m_VertexBuffers.key_comp()(meshName, lower_bound->first)))
-	{
-		return lower_bound->second;
-	}
-	else
-	{
-		VertexBuffer* vertexBuffer = CreateVertexBuffer(meshName);
-		m_VertexBuffers.insert(lower_bound, {meshName, vertexBuffer});    
-		return vertexBuffer;
-	}
-}
-
-std::unique_ptr<par_shapes_mesh, std::function<void(par_shapes_mesh*)>> 
-MakeUniqueMesh(par_shapes_mesh* mesh)
-{
-	auto mesh_delete = [](par_shapes_mesh* m) { 
-		par_shapes_free_mesh(m); 
+	auto mesh_delete = [](par_shapes_mesh* m) {
+		par_shapes_free_mesh(m);
 	};
 
-	return { mesh, mesh_delete };
-}
-
-VertexBuffer* VertexBufferManager::CreateVertexBuffer(const std::string& meshName)
-{
 	if (meshName == "cube")
-	{
-		auto cube = MakeUniqueMesh( par_shapes_create_cube() );
-		return CreateVertexBuffer(cube.get());
-	}
-	else if (meshName == "sphere")
-	{
-		auto sphere = MakeUniqueMesh(par_shapes_create_subdivided_sphere(5) );
-		return CreateVertexBuffer(sphere.get());
-	}
-	else if (meshName == "dodecahedron")
-	{
-		auto dodecahedron = MakeUniqueMesh(par_shapes_create_dodecahedron());
-		return CreateVertexBuffer(dodecahedron.get());
-	}
-	else if (meshName == "tetrahedron")
-	{
-		auto dodecahedron = MakeUniqueMesh(par_shapes_create_tetrahedron());
-		return CreateVertexBuffer(dodecahedron.get());
-	}
-	else if (meshName == "octahedron")
-	{
-		auto octohedron = MakeUniqueMesh(par_shapes_create_octahedron());
-		return CreateVertexBuffer(octohedron.get());
-	}
-	else if (meshName == "icosahedron")
-	{
-		auto octohedron = MakeUniqueMesh(par_shapes_create_icosahedron());
-		return CreateVertexBuffer(octohedron.get());
-	}
+		return{ par_shapes_create_cube(), mesh_delete };
 
+	if (meshName == "sphere")
+		return{ par_shapes_create_subdivided_sphere(5), mesh_delete };
+
+	if (meshName == "dodecahedron")
+		return{ par_shapes_create_dodecahedron(), mesh_delete };
+
+	if (meshName == "tetrahedron")
+		return{ par_shapes_create_tetrahedron(), mesh_delete };
+
+	if (meshName == "octahedron")
+		return{ par_shapes_create_octahedron(), mesh_delete };
+
+	if (meshName == "icosahedron")
+		return{ par_shapes_create_icosahedron(), mesh_delete };
+
+	// TODO: maybe do something smarter ?
 	assert(false);
 	return nullptr;
 }
 
-VertexBuffer* VertexBufferManager::CreateVertexBuffer(par_shapes_mesh* mesh)
+std::shared_ptr<VertexBuffer> VertexBufferManager::GetVertexBuffer(const std::string& meshName)
 {
-	par_shapes_unweld(mesh, true);
-	par_shapes_compute_normals(mesh);
+	// If we have copied the weak_ptr (no &), and created a shared ptr from it, we would break the ref count.
+	std::weak_ptr<VertexBuffer>& vertexBuffer = m_VertexBufferCache[meshName];
+
+	// if we never created the vertex buffer.
+	if (vertexBuffer.expired())
+	{
+		// The lambda is called when the ref count reaches 0. it removes the vertex buffer from the cache.
+		std::shared_ptr<VertexBuffer> sharedVertexBuffer(NewVertexBuffer(meshName), [this, meshName](VertexBuffer* vb) {
+			m_VertexBufferCache.erase(meshName);
+			delete vb;
+		});
+
+		// Make the cache entry point to the newly created vertex buffer.
+		vertexBuffer = sharedVertexBuffer;
+
+		return sharedVertexBuffer;
+	}
+	// Simple case: the vertex buffer is already loaded. Just return it.
+	else
+	{
+		return vertexBuffer.lock();
+	}
+}
+
+VertexBuffer* VertexBufferManager::NewVertexBuffer(const std::string& meshName)
+{
+	auto mesh = CreateParShapeMesh(meshName);
+
+	par_shapes_unweld(mesh.get(), true);
+	par_shapes_compute_normals(mesh.get());
 
 	VertexBufferData vbd;
 	vbd.NbVertices = mesh->npoints;
 	vbd.Vertices = mesh->points;
 	vbd.Normals = mesh->normals;
-	vbd.TextureCoords = mesh->tcoords;
+	vbd.UV = mesh->tcoords;
 
 	return new VertexBuffer(vbd);
+}
+
+std::shared_ptr<VertexBuffer> VertexBufferManager::CreateVertexBuffer(const VertexBufferData& vbd)
+{
+	return std::make_shared<VertexBuffer>(vbd);
 }

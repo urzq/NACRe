@@ -20,8 +20,8 @@
 SceneNode::SceneNode(const char* vertexBuferName):
 	m_VertexBufferName(vertexBuferName)
 {	
-	auto vertexBufferManager = ServiceLocator::GetInstance()->GetVertexBuferManager();
-	VertexBuffer* vertexBuffer = vertexBufferManager->GetVertexBuffer(vertexBuferName);
+	auto vertexBufferManager = ServiceLocator::GetInstance()->GetVertexBufferManager();
+	auto vertexBuffer = vertexBufferManager->GetVertexBuffer(vertexBuferName);
 
 	auto shaderProgramManager = ServiceLocator::GetInstance()->GetShaderProgramManager();
 	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("BasicPhong.vert", "BasicPhong.frag");

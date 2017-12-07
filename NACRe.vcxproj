@@ -169,12 +169,15 @@
     <ClCompile Include="src\Graphics\Transform.cpp" />
     <ClCompile Include="src\Input\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Scene\MinecraftCube.cpp" />
     <ClCompile Include="src\Scene\Scene.cpp" />
     <ClCompile Include="src\Scene\SceneNode.cpp" />
     <ClCompile Include="src\Scene\WhiteCube.cpp" />
     <ClCompile Include="src\Shader\Shader.cpp" />
     <ClCompile Include="src\Shader\ShaderProgram.cpp" />
     <ClCompile Include="src\Shader\ShaderProgramManager.cpp" />
+    <ClCompile Include="src\Texture\GLTexture.cpp" />
+    <ClCompile Include="src\Texture\TextureManager.cpp" />
     <ClCompile Include="src\VertexBuffer\VertexBuffer.cpp" />
     <ClCompile Include="src\VertexBuffer\VertexBufferManager.cpp" />
   </ItemGroup>
@@ -186,6 +189,7 @@
     <ClInclude Include="externals\imgui\stb_rect_pack.h" />
     <ClInclude Include="externals\imgui\stb_textedit.h" />
     <ClInclude Include="externals\imgui\stb_truetype.h" />
+    <ClInclude Include="externals\stb\stb_image.h" />
     <ClInclude Include="src\Core\Clock.h" />
     <ClInclude Include="src\core\Color.h" />
     <ClInclude Include="src\Core\ServiceLocator.h" />
@@ -195,21 +199,29 @@
     <ClInclude Include="src\Graphics\Renderer.h" />
     <ClInclude Include="src\Graphics\Transform.h" />
     <ClInclude Include="src\Input\InputManager.h" />
+    <ClInclude Include="src\Scene\MinecraftCube.h" />
     <ClInclude Include="src\Scene\Scene.h" />
     <ClInclude Include="src\Scene\SceneNode.h" />
     <ClInclude Include="src\Scene\WhiteCube.h" />
     <ClInclude Include="src\Shader\Shader.h" />
     <ClInclude Include="src\Shader\ShaderProgram.h" />
     <ClInclude Include="src\Shader\ShaderProgramManager.h" />
+    <ClInclude Include="src\Texture\GLTexture.h" />
+    <ClInclude Include="src\Texture\TextureManager.h" />
     <ClInclude Include="src\VertexBuffer\VertexBuffer.h" />
     <ClInclude Include="src\VertexBuffer\VertexBufferData.h" />
     <ClInclude Include="src\VertexBuffer\VertexBufferManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="data\Shader\BasicDiffuse.frag" />
+    <None Include="data\Shader\BasicDiffuse.vert" />
     <None Include="data\shader\BasicPhong.frag" />
     <None Include="data\shader\BasicPhong.vert" />
     <None Include="data\shader\FlatColor.frag" />
     <None Include="data\shader\FlatColor.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\Texture\MinecraftCube.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

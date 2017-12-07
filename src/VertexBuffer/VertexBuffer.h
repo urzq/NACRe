@@ -7,14 +7,8 @@ struct VertexBufferData;
 
 class VertexBuffer
 {
-	friend class VertexBufferManager;
-
 public:
-	int GetNbVertice() const;
-	void Use() const;
-
-private:
-	VertexBuffer(VertexBufferData& data);
+	VertexBuffer(const VertexBufferData& data);
 	VertexBuffer(const VertexBuffer& other) = delete;
 	VertexBuffer& operator=(const VertexBuffer& other) = delete;
 	VertexBuffer(VertexBuffer&& other) = delete;
@@ -22,11 +16,16 @@ private:
 
 	~VertexBuffer();
 
-private:
-	GLuint m_VAO;
+	int GetNbVertice() const;
+	void Use() const;
 
-	GLuint m_VBO_vertices;
-	GLuint m_VBO_normals;
+private:
+	GLuint m_VAO = -1;
+
+	GLuint m_VBO_vertices = -1;
+	GLuint m_VBO_normals = -1;
+	GLuint m_VBO_UV = -1;
+
 
 	int m_NbVertices;
 };

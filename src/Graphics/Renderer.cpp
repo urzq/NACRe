@@ -173,7 +173,7 @@ void Renderer::RefreshVertexBuffer(VertexBuffer* newVertexBuffer)
 // si j'ai une texture de bindée, et que je change de shader, est-ce que la texture est toujours bindée correctement ?
 void Renderer::RefreshTextures(const std::vector<GLTexture*>& textures)
 {
-	for (auto i = 0; i < textures.size(); ++i)
+	for (std::size_t i = 0; i < textures.size(); ++i)
 	{
 		glActiveTexture(GL_TEXTURE0 + i);
 		glBindTexture(GL_TEXTURE_2D, textures[i]->GetTextureID());
@@ -191,7 +191,7 @@ Light& Renderer::GetLight()
 	return m_Light;
 }
 
-Renderable* Renderer::CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures)
+Renderable* Renderer::CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures)
 {
 	auto renderable = new Renderable(std::move(vertexBuffer), refShaderProgram, std::move(textures));
 	m_Renderables.push_back(renderable);

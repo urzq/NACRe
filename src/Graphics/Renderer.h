@@ -35,7 +35,7 @@ public:
 	void ToggleImGuiEnabled();
 	bool IsImGuiEnabled() const;
 
-	Renderable* CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures = {});
+	Renderable* CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures = {});
 	void DestroyRenderable(Renderable* renderable);
 
 	GLFWwindow* GetGLFWwindow() const;

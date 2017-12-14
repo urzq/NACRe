@@ -16,7 +16,7 @@ class Renderable
 	friend class Renderer;
 
 private:
-	Renderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures = {});
+	Renderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures = {});
 
 public:
 	VertexBuffer* GetVertexBuffer();

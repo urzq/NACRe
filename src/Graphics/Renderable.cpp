@@ -5,7 +5,7 @@
 
 #include "Renderable.h"
 
-Renderable::Renderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*>&& textures):
+Renderable::Renderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures):
 	m_VertexBuffer(std::move(vertexBuffer)),
 	m_RefShaderProgram(refShaderProgram),
 	m_Textures(std::move(textures)),

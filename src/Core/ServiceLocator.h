@@ -13,26 +13,14 @@ public:
 	static void Init();
 	static void Shutdown();
 
-	static ServiceLocator* GetInstance();
-
-	Renderer* GetRenderer();
-	VertexBufferManager* GetVertexBufferManager();
-	ShaderProgramManager* GetShaderProgramManager();
-	TextureManager* GetTextureManager();
-	InputManager* GetInputManager();
+	template<class T> static T* Get();
 
 private:
-	ServiceLocator();
-	~ServiceLocator();
-
-private:
-	static ServiceLocator* s_Instance;
-
-	Renderer* m_Renderer;
-	VertexBufferManager* m_VertexBuferManager;
-	ShaderProgramManager* m_ShaderProgramManager;
-	TextureManager* m_TextureManager;
-	InputManager* m_InputManager;
+	static Renderer* s_Renderer;
+	static VertexBufferManager* s_VertexBuferManager;
+	static ShaderProgramManager* s_ShaderProgramManager;
+	static TextureManager* s_TextureManager;
+	static InputManager* s_InputManager;
 };
 
 #endif

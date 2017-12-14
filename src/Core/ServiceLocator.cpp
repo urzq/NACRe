@@ -5,63 +5,56 @@
 #include "Input/InputManager.h"
 #include "ServiceLocator.h"
 
-ServiceLocator* ServiceLocator::s_Instance = nullptr;
+Renderer* ServiceLocator::s_Renderer;
+VertexBufferManager* ServiceLocator::s_VertexBuferManager;
+ShaderProgramManager* ServiceLocator::s_ShaderProgramManager;
+TextureManager* ServiceLocator::s_TextureManager;
+InputManager* ServiceLocator::s_InputManager;
 
 void ServiceLocator::Init()
 {
-	s_Instance = new ServiceLocator();
+	s_Renderer = new Renderer();
+	s_VertexBuferManager = new VertexBufferManager();
+	s_ShaderProgramManager = new ShaderProgramManager();
+	s_TextureManager = new TextureManager();
+	s_InputManager = new InputManager();
 }
 
 void ServiceLocator::Shutdown()
 {
-	delete s_Instance;
-	s_Instance = nullptr;
+	delete s_Renderer;
+	delete s_VertexBuferManager;
+	delete s_ShaderProgramManager;
+	delete s_TextureManager;
+	delete s_InputManager;
 }
 
-ServiceLocator* ServiceLocator::GetInstance()
+template<>
+Renderer* ServiceLocator::Get<Renderer>()
 {
-	return s_Instance;
+	return s_Renderer;
 }
 
-ServiceLocator::ServiceLocator()
+template<>
+VertexBufferManager* ServiceLocator::Get<VertexBufferManager>()
 {
-	m_Renderer = new Renderer();
-	m_VertexBuferManager = new VertexBufferManager();
-	m_ShaderProgramManager = new ShaderProgramManager();
-	m_TextureManager = new TextureManager();
-	m_InputManager = new InputManager();
+	return s_VertexBuferManager;
 }
 
-ServiceLocator::~ServiceLocator()
+template<>
+ShaderProgramManager* ServiceLocator::Get<ShaderProgramManager>()
 {
-	delete m_Renderer;
-	delete m_VertexBuferManager;
-	delete m_ShaderProgramManager;
-	delete m_TextureManager;
-	delete m_InputManager;
+	return s_ShaderProgramManager;
 }
 
-Renderer* ServiceLocator::GetRenderer()
+template<>
+TextureManager* ServiceLocator::Get<TextureManager>()
 {
-	return m_Renderer;
+	return s_TextureManager;
 }
 
-VertexBufferManager* ServiceLocator::GetVertexBufferManager()
+template<>
+InputManager* ServiceLocator::Get<InputManager>()
 {
-	return m_VertexBuferManager;
-}
-
-ShaderProgramManager* ServiceLocator::GetShaderProgramManager()
-{
-	return m_ShaderProgramManager;
-}
-
-TextureManager* ServiceLocator::GetTextureManager()
-{
-	return m_TextureManager;
-}
-
-InputManager* ServiceLocator::GetInputManager()
-{
-	return m_InputManager;
+	return s_InputManager;
 }

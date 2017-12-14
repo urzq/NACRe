@@ -18,13 +18,13 @@
 WhiteCube::WhiteCube():
 	m_TotalTime(0.0f)
 {
-	auto vertexBufferManager = ServiceLocator::GetInstance()->GetVertexBufferManager();
+	auto vertexBufferManager = ServiceLocator::Get<VertexBufferManager>();
 	auto vertexBuffer = vertexBufferManager->GetVertexBuffer("cube");
 
-	auto shaderProgramManager = ServiceLocator::GetInstance()->GetShaderProgramManager();
+	auto shaderProgramManager = ServiceLocator::Get<ShaderProgramManager>();
 	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("FlatColor.vert", "FlatColor.frag");
 
-	auto renderer = ServiceLocator::GetInstance()->GetRenderer();
+	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram);
 
 	m_Renderable->GetTransform().SetScale({ 0.2f, 0.2f, 0.2f });
@@ -32,7 +32,7 @@ WhiteCube::WhiteCube():
 
 WhiteCube::~WhiteCube()
 {
-	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
+	Renderer* renderer = ServiceLocator::Get<Renderer>();
 	renderer->DestroyRenderable(m_Renderable);
 }
 

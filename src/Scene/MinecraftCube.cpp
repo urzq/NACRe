@@ -22,13 +22,13 @@ MinecraftCube::MinecraftCube()
 {
 	auto vertexBuffer = CreateVertexBuffer();
 
-	auto shaderProgramManager = ServiceLocator::GetInstance()->GetShaderProgramManager();
+	auto shaderProgramManager = ServiceLocator::Get<ShaderProgramManager>();
 	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("BasicDiffuse.vert", "BasicDiffuse.frag");
 
-	auto textureManager = ServiceLocator::GetInstance()->GetTextureManager();
+	auto textureManager = ServiceLocator::Get<TextureManager>();
 	auto texture = textureManager->GetTexture("data/Texture/MinecraftCube.png");
 
-	auto renderer = ServiceLocator::GetInstance()->GetRenderer();
+	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram, {texture});
 
 	m_Renderable->GetTransform().SetScale({ 1.0f, 1.0f, 1.0f });
@@ -36,7 +36,7 @@ MinecraftCube::MinecraftCube()
 
 MinecraftCube::~MinecraftCube()
 {
-	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
+	auto renderer = ServiceLocator::Get<Renderer>();
 	renderer->DestroyRenderable(m_Renderable);
 }
 

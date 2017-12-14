@@ -36,11 +36,11 @@ int main()
 {
 	ServiceLocator::Init();
 
-	Renderer* renderer = ServiceLocator::GetInstance()->GetRenderer();
+	auto renderer = ServiceLocator::Get<Renderer>();
 	renderer->Init("NACRe", glm::uvec2(1024, 768));
 	renderer->SetClearColor(Color(0x84A5FF));
 
-	InputManager* inputManager = ServiceLocator::GetInstance()->GetInputManager();
+	auto inputManager = ServiceLocator::Get<InputManager>();
 	inputManager->Init();
 
 	Clock clock;

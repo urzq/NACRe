@@ -10,7 +10,7 @@ static KeyState s_KeyStates[GLFW_KEY_LAST + 1];
 
 void InputManager::Init()
 {
-	GLFWwindow* window = ServiceLocator::GetInstance()->GetRenderer()->GetGLFWwindow();
+	GLFWwindow* window = ServiceLocator::Get<Renderer>()->GetGLFWwindow();
 	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, KeyCallback);
 }

@@ -48,11 +48,13 @@ void Camera::Update(float dT)
 	}
 
 	// TODO: abstract those call in InputManager.
-	GLFWwindow* window = ServiceLocator::GetInstance()->GetRenderer()->GetGLFWwindow();
+	GLFWwindow* window = ServiceLocator::Get<Renderer>()->GetGLFWwindow();
 
 	// Get mouse position
 	double xpos, ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
+
+	// TODO: get the actual window size.
 
 	// Reset mouse position for next frame
 	glfwSetCursorPos(window, 1024/2, 768/2);
@@ -75,10 +77,9 @@ void Camera::Update(float dT)
 		cos(m_HorizontalAngle - 3.14f/2.0f)
 	);
 	
-	// Up vector
 	glm::vec3 up = glm::cross( right, direction );
 
-	auto inputManager = ServiceLocator::GetInstance()->GetInputManager();
+	auto inputManager = ServiceLocator::Get<InputManager>();
 
 	// Move forward
 	if (inputManager->IsKeyDown(GLFW_KEY_UP)){

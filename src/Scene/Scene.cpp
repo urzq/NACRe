@@ -53,7 +53,7 @@ void Scene::UpdateLight(float dT, glm::vec3 cameraPosition)
 {
 	m_WhiteCube.Update(dT);
 
-	auto renderer = ServiceLocator::GetInstance()->GetRenderer();
+	auto renderer = ServiceLocator::Get<Renderer>();
 	auto lightPos = m_WhiteCube.GetPosition();
 	auto lightColor = m_WhiteCube.GetLightColor();
 

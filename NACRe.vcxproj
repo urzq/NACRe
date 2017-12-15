@@ -192,6 +192,7 @@
     <ClInclude Include="externals\stb\stb_image.h" />
     <ClInclude Include="src\Core\Clock.h" />
     <ClInclude Include="src\core\Color.h" />
+    <ClInclude Include="src\Core\Memory.h" />
     <ClInclude Include="src\Core\ServiceLocator.h" />
     <ClInclude Include="src\Graphics\Camera.h" />
     <ClInclude Include="src\Graphics\Light.h" />

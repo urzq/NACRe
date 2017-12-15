@@ -34,12 +34,6 @@ MinecraftCube::MinecraftCube()
 	m_Renderable->GetTransform().SetScale({ 1.0f, 1.0f, 1.0f });
 }
 
-MinecraftCube::~MinecraftCube()
-{
-	auto renderer = ServiceLocator::Get<Renderer>();
-	renderer->DestroyRenderable(m_Renderable);
-}
-
 std::shared_ptr<VertexBuffer> MinecraftCube::CreateVertexBuffer()
 {
 	float vertices[] = { -1, 1, 0, 1, 1, 0, 1, -1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0 };

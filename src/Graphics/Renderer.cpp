@@ -12,6 +12,8 @@
 #include "Renderable.h"
 #include "Renderer.h"
 
+using namespace Memory;
+
 Renderer::Renderer() :
 	m_Window(nullptr),
 	m_CurrentVertexBuffer(nullptr),
@@ -191,16 +193,17 @@ Light& Renderer::GetLight()
 	return m_Light;
 }
 
-Renderable* Renderer::CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures)
+unique_ptr_del<Renderable>
+Renderer::CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures)
 {
 	auto renderable = new Renderable(std::move(vertexBuffer), refShaderProgram, std::move(textures));
 	m_Renderables.push_back(renderable);
 	
-	return renderable;
+	auto destroyRenderable = [this](Renderable* renderable){
+		m_Renderables.erase(std::remove(m_Renderables.begin(), m_Renderables.end(), renderable), m_Renderables.end());
+		delete renderable;
+	};
+
+	return { renderable, destroyRenderable };
 }
 
-void Renderer::DestroyRenderable(Renderable* renderable)
-{
-	m_Renderables.erase(std::remove(m_Renderables.begin(), m_Renderables.end(), renderable), m_Renderables.end());
-	delete renderable;
-}

@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+#include "Core/Memory.h"
+
 class Renderable;
 
 class SceneNode
@@ -10,13 +12,6 @@ class SceneNode
 public:
 	SceneNode(const char* vertexBuferName);
 
-	SceneNode(const SceneNode& other) = delete;
-	SceneNode(SceneNode&& other) = delete;
-	SceneNode& operator=(const SceneNode& other) = delete;
-	SceneNode& operator=(SceneNode&& other) = delete;
-
-	~SceneNode();
-	
 	void SetPosition(const glm::vec3& position);
 	void SceneNode::SetScale(const glm::vec3& scale);
 	void SetColor(const glm::vec3& color);
@@ -24,7 +19,7 @@ public:
 	virtual void Update(float dT);
 
 private:
-	Renderable* m_Renderable;
+	Memory::unique_ptr_del<Renderable> m_Renderable;
 	const char* m_VertexBufferName;
 
 	glm::vec3 glm_pos;

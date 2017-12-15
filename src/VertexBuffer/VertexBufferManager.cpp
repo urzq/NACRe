@@ -5,12 +5,16 @@
 #define PAR_SHAPES_IMPLEMENTATION
 #include <grasshoper/par_shapes.h>
 
+#include "Core/Memory.h"
+
 #include "VertexBuffer.h"
 #include "VertexBufferData.h"
 #include "VertexBufferManager.h"
 
+using namespace Memory;
+
 // Create a par_shapes_mesh from a name ("cube", "sphere"), that knows how to delete itself.
-static std::unique_ptr<par_shapes_mesh, std::function<void(par_shapes_mesh*)>>
+static unique_ptr_del<par_shapes_mesh>
 CreateParShapeMesh(const std::string& meshName)
 {
 	auto mesh_delete = [](par_shapes_mesh* m) {

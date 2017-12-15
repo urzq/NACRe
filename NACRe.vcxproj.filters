@@ -165,6 +165,9 @@
     <ClInclude Include="src\Scene\MinecraftCube.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\Memory.h">
+      <Filter>src\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

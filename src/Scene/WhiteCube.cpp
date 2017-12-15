@@ -30,12 +30,6 @@ WhiteCube::WhiteCube():
 	m_Renderable->GetTransform().SetScale({ 0.2f, 0.2f, 0.2f });
 }
 
-WhiteCube::~WhiteCube()
-{
-	Renderer* renderer = ServiceLocator::Get<Renderer>();
-	renderer->DestroyRenderable(m_Renderable);
-}
-
 void WhiteCube::SetPosition(const glm::vec3& position)
 {
 	m_Renderable->GetTransform().SetPosition(position);

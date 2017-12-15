@@ -1,9 +1,12 @@
+#include "Core/Memory.h"
 #include "Graphics/Renderer.h"
 #include "VertexBuffer/VertexBufferManager.h"
 #include "Shader/ShaderProgramManager.h"
 #include "Texture/TextureManager.h"
 #include "Input/InputManager.h"
 #include "ServiceLocator.h"
+
+using namespace Memory;
 
 Renderer* ServiceLocator::s_Renderer;
 VertexBufferManager* ServiceLocator::s_VertexBuferManager;
@@ -13,20 +16,20 @@ InputManager* ServiceLocator::s_InputManager;
 
 void ServiceLocator::Init()
 {
-	s_Renderer = new Renderer();
-	s_VertexBuferManager = new VertexBufferManager();
-	s_ShaderProgramManager = new ShaderProgramManager();
-	s_TextureManager = new TextureManager();
-	s_InputManager = new InputManager();
+	safe_new<Renderer>(s_Renderer);
+	safe_new<VertexBufferManager>(s_VertexBuferManager);
+	safe_new<ShaderProgramManager>(s_ShaderProgramManager);
+	safe_new<TextureManager>(s_TextureManager);
+	safe_new<InputManager>(s_InputManager);
 }
 
 void ServiceLocator::Shutdown()
 {
-	delete s_Renderer;
-	delete s_VertexBuferManager;
-	delete s_ShaderProgramManager;
-	delete s_TextureManager;
-	delete s_InputManager;
+	safe_delete(s_Renderer);
+	safe_delete(s_VertexBuferManager);
+	safe_delete(s_ShaderProgramManager);
+	safe_delete(s_TextureManager);
+	safe_delete(s_InputManager);
 }
 
 template<>

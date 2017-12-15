@@ -30,12 +30,6 @@ SceneNode::SceneNode(const char* vertexBuferName):
 	m_Renderable = renderer->CreateRenderable(vertexBuffer, shaderProgram);
 }
 
-SceneNode::~SceneNode()
-{
-	auto renderer = ServiceLocator::Get<Renderer>();
-	renderer->DestroyRenderable(m_Renderable);
-}
-
 void SceneNode::SetPosition(const glm::vec3& position)
 {
 	glm_pos = position;

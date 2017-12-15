@@ -2,7 +2,7 @@
 #define __RENDERER_H__
 
 #include <memory>
-
+#include <functional>
 #include <GL/glew.h>
 #include <glfw3.h>
 
@@ -10,6 +10,7 @@
 
 #include <glm/glm.hpp>
 
+#include "Core/Memory.h"
 #include "Light.h"
 
 class Renderable;
@@ -35,8 +36,8 @@ public:
 	void ToggleImGuiEnabled();
 	bool IsImGuiEnabled() const;
 
-	Renderable* CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures = {});
-	void DestroyRenderable(Renderable* renderable);
+	Memory::unique_ptr_del<Renderable>
+	CreateRenderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram* refShaderProgram, std::vector<GLTexture*> textures = {});
 
 	GLFWwindow* GetGLFWwindow() const;
 

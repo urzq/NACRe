@@ -25,8 +25,7 @@ GLuint Shader::GetShaderID() const
 
 std::string Shader::GetShaderCode(const std::string& filename) const
 {
-	// TODO: This confused me. Do I want to have full path in my engine or just filename ?
-	std::ifstream shaderStream("data/shader/" + filename, std::ios::in);
+	std::ifstream shaderStream(filename, std::ios::in);
 
 	if (! shaderStream.is_open())
 	{

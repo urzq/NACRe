@@ -22,7 +22,7 @@ WhiteCube::WhiteCube():
 	auto vertexBuffer = vertexBufferManager->GetVertexBuffer("cube");
 
 	auto shaderProgramManager = ServiceLocator::Get<ShaderProgramManager>();
-	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("FlatColor.vert", "FlatColor.frag");
+	auto shaderProgram = shaderProgramManager->GetShaderProgram("data/shader/FlatColor.vert", "data/shader/FlatColor.frag");
 
 	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram);

@@ -24,7 +24,7 @@ SceneNode::SceneNode(const char* vertexBuferName):
 	auto vertexBuffer = vertexBufferManager->GetVertexBuffer(vertexBuferName);
 
 	auto shaderProgramManager = ServiceLocator::Get<ShaderProgramManager>();
-	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("BasicPhong.vert", "BasicPhong.frag");
+	auto shaderProgram = shaderProgramManager->GetShaderProgram("data/shader/BasicPhong.vert", "data/shader/BasicPhong.frag");
 
 	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(vertexBuffer, shaderProgram);

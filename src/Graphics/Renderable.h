@@ -33,7 +33,6 @@ private:
 	ShaderProgram* m_RefShaderProgram;
 	Transform m_Transform;
 
-	// TODO: create a polymorphic material class ? 
 	glm::vec3 m_ObjectColor;
 };
 

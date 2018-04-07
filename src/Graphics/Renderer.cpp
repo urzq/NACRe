@@ -12,7 +12,7 @@
 #include "Renderable.h"
 #include "Renderer.h"
 
-using namespace Memory;
+using namespace memory;
 
 Renderer::Renderer() :
 	m_Window(nullptr),
@@ -172,7 +172,7 @@ void Renderer::RefreshVertexBuffer(VertexBuffer* newVertexBuffer)
 }
 
 // TODO: do more testing, and see if it can be cached ?
-// si j'ai une texture de bindée, et que je change de shader, est-ce que la texture est toujours bindée correctement ?
+// If a texture is bind, and then the shader is swaped, is the texture still usable by the shader ? 
 void Renderer::RefreshTextures(const std::vector<GLTexture*>& textures)
 {
 	for (std::size_t i = 0; i < textures.size(); ++i)

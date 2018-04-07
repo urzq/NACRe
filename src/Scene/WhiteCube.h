@@ -18,7 +18,7 @@ public:
 	void Update(float dT);
 
 private:
-	Memory::unique_ptr_del<Renderable> m_Renderable;
+	memory::unique_ptr_del<Renderable> m_Renderable;
 	glm::vec3 m_LightColor;
 	float m_TotalTime;
 };

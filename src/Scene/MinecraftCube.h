@@ -21,7 +21,7 @@ private:
 	std::shared_ptr<VertexBuffer> CreateVertexBuffer();
 
 private:
-	Memory::unique_ptr_del<Renderable> m_Renderable;
+	memory::unique_ptr_del<Renderable> m_Renderable;
 };
 
 #endif

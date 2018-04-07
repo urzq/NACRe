@@ -11,7 +11,7 @@
 #include "VertexBufferData.h"
 #include "VertexBufferManager.h"
 
-using namespace Memory;
+using namespace memory;
 
 // Create a par_shapes_mesh from a name ("cube", "sphere"), that knows how to delete itself.
 static unique_ptr_del<par_shapes_mesh>

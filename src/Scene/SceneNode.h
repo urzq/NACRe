@@ -19,7 +19,7 @@ public:
 	virtual void Update(float dT);
 
 private:
-	Memory::unique_ptr_del<Renderable> m_Renderable;
+	memory::unique_ptr_del<Renderable> m_Renderable;
 	const char* m_VertexBufferName;
 
 	glm::vec3 glm_pos;

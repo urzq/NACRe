@@ -15,6 +15,7 @@
 #include "Scene/Scene.h"
 
 /* TODO LIST:
+	Remove par_shape, and load basic models from obj (cube, sphere etc.)
 	Smarted handling of textures in renderer.cpp
 	Indexes.
 	Easier binding between vertexbuffer and shader (based on name ?)
@@ -46,7 +47,6 @@ int main()
 	Clock clock;
 	Camera camera;
 	Scene scene;
-
 
 	while (renderer->IsRunning() && ! inputManager->IsKeyDown(GLFW_KEY_ESCAPE) )
 	{

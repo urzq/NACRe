@@ -6,7 +6,7 @@
 #include "Input/InputManager.h"
 #include "ServiceLocator.h"
 
-using namespace Memory;
+using namespace memory;
 
 Renderer* ServiceLocator::s_Renderer;
 VertexBufferManager* ServiceLocator::s_VertexBuferManager;

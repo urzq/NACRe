@@ -44,9 +44,9 @@ void Scene::Update(float dT, glm::vec3 cameraPosition)
 		node->Update(dT);
 	}
 
-	UpdateLight(dT, cameraPosition);
-
 	m_MinecraftCube.Update(dT);
+
+	UpdateLight(dT, cameraPosition);
 }
 
 void Scene::UpdateLight(float dT, glm::vec3 cameraPosition)

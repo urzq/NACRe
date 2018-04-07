@@ -23,7 +23,7 @@ MinecraftCube::MinecraftCube()
 	auto vertexBuffer = CreateVertexBuffer();
 
 	auto shaderProgramManager = ServiceLocator::Get<ShaderProgramManager>();
-	ShaderProgram* shaderProgram = shaderProgramManager->GetShaderProgram("BasicDiffuse.vert", "BasicDiffuse.frag");
+	auto shaderProgram = shaderProgramManager->GetShaderProgram("data/shader/BasicDiffuse.vert", "data/shader/BasicDiffuse.frag");
 
 	auto textureManager = ServiceLocator::Get<TextureManager>();
 	auto texture = textureManager->GetTexture("data/Texture/MinecraftCube.png");

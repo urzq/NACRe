@@ -5,7 +5,7 @@
 #include <memory>
 #include <functional>
 
-namespace Memory
+namespace memory
 {
 	// A unique_ptr with a custom deleter.
 	template<typename T>

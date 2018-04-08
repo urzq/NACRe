@@ -1,7 +1,7 @@
 #ifndef __VERTEX_BUFFER_H__
 #define __VERTEX_BUFFER_H__
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 struct VertexBufferData;
 

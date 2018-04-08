@@ -2,6 +2,7 @@
 #define __COLOR_H_
 
 #include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Color
 {

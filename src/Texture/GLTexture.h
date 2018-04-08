@@ -2,7 +2,7 @@
 #define __GL_TEXTURE_H__
 
 #include <string>
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 class GLTexture
 {

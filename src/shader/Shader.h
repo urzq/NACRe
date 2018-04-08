@@ -2,7 +2,7 @@
 #define __SHADER_H__
 
 #include <string>
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 //GL_FRAGMENT_SHADER
 //GL_VERTEX_SHADER

@@ -3,7 +3,7 @@
 #include <algorithm>
 
 #include <imgui/imgui.h>
-#include <imgui/imgui_impl_glfw_gl3.h>
+#include <ImGUiImpl/imgui_impl_glfw_gl3.h>
 
 #include "Shader/ShaderProgram.h"
 #include "VertexBuffer/VertexBuffer.h"
@@ -24,6 +24,7 @@ Renderer::Renderer() :
 
 Renderer::~Renderer()
 {
+	ImGui::DestroyContext();
 	glfwTerminate();
 }
 
@@ -49,14 +50,15 @@ void Renderer::Init(const char* windowName, glm::uvec2 windowSize)
 		throw std::exception("Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible");
 	}
 
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
 	ImGui_ImplGlfwGL3_Init(m_Window, true);
+	ImGui::StyleColorsDark();
 
 	glfwMakeContextCurrent(m_Window);
 
-	// Initialize GLEW
-	glewExperimental = true; // Needed for core profile
-
-	if (glewInit() != GLEW_OK)
+	if ( !gladLoadGL())
 	{
 		glfwTerminate();
 		throw std::exception("Failed to initialize GLEW\n");
@@ -139,9 +141,11 @@ void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
 		glDrawArrays(GL_TRIANGLES, 0, nbVertice);
 	}
 
+	ImGui::Render();
+
 	if (m_ImGuiEnabled)
 	{
-		ImGui::Render();
+		ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 	}
 
 	glfwSwapBuffers(m_Window);

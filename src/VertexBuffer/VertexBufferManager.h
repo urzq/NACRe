@@ -5,7 +5,7 @@
 #include <memory>
 #include <unordered_map>
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 
 
 class VertexBuffer;

@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -67,7 +67,7 @@ void SceneNode::Update(float dT)
 		m_Renderable->GetTransform().SetEuler(glm_euler);
 	}
 	
-	ImGui::ColorEditMode(ImGuiColorEditMode_RGB);
+	//ImGui::ColorEditMode(ImGuiColorEditMode_RGB);
 
 	if (ImGui::ColorEdit3("color 1", glm::value_ptr(glm_color)))
 	{

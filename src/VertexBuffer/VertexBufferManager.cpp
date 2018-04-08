@@ -3,7 +3,7 @@
 #include <functional>
 
 #define PAR_SHAPES_IMPLEMENTATION
-#include <grasshoper/par_shapes.h>
+#include <par/par_shapes.h>
 
 #include "Core/Memory.h"
 

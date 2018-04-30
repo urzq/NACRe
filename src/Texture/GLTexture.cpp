@@ -15,14 +15,14 @@ GLTexture::GLTexture(const std::string& path)
 	glBindTexture(GL_TEXTURE_2D, m_TextureID);
 
 	// set texture wrapping to GL_REPEAT (default wrapping method) S, T = U, V. 
-	// The GL_REPEAT mode has textures repeat when you go past (0,0) to (1,1) range
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// The GL_REPEAT mode has textures repeat when you go past (0,0) to (1,1) range.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	
-	// When MINifying the image, use a LINEAR filtering		
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	// When MAGnifying the image use a LINEAR filtering		
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// When MINifying the image, use the nearest Texel.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	// When MAGnifying the image use the nearest Texel.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	// tell stb_image.h to flip loaded texture's on the y-axis.
 	stbi_set_flip_vertically_on_load(true); 
@@ -36,7 +36,7 @@ GLTexture::GLTexture(const std::string& path)
 		throw new std::exception("Failed to load texture");
 	}
 	
-	// create texture 
+	// create the texture on the graphic card
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 

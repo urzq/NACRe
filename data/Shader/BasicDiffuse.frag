@@ -1,6 +1,8 @@
 #version 330 core
 
-in vec2 UV;
+// centroid= better sampling when we turn on MSAA. It avoids texture bleeding.
+// see this article: https://www.opengl.org/pipeline/article/vol003_6/
+centroid in vec2 UV;
 
 uniform sampler2D texture0;
 

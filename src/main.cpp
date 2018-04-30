@@ -15,16 +15,16 @@
 #include "Scene/Scene.h"
 
 /* TODO LIST:
+	Indexes.
+	Add some movement to the pieces :)
 	Remove par_shape, and load basic models from obj (cube, sphere etc.)
 	Smarted handling of textures in renderer.cpp
-	Indexes.
 	Easier binding between vertexbuffer and shader (based on name ?)
 	Model loading
 	Material system.
 	Textured cube !
 	Handle all the TODO left in the code.
 	Less duplication between minecraftCube, WhiteCube and sceneNode.
-	Template the ServiceLocator : ServiceLocator.Get<Renderer>();
 	Create a templated ResourceCache (cf. Urho3D)
 	Shader hot reload :)
 	Implement more shaders -> Wireframe effect.

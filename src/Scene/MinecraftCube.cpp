@@ -29,18 +29,46 @@ MinecraftCube::MinecraftCube()
 	auto texture = textureManager->GetTexture("data/Texture/MinecraftCube.png");
 
 	auto renderer = ServiceLocator::Get<Renderer>();
-	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram, {texture});
+	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram, { texture });
 
 	m_Renderable->GetTransform().SetScale({ 1.0f, 1.0f, 1.0f });
 }
 
 std::shared_ptr<VertexBuffer> MinecraftCube::CreateVertexBuffer()
 {
-	float vertices[] = { -1, 1, 0, 1, 1, 0, 1, -1, 0, -1, 1, 0, 1, -1, 0, -1, -1, 0 };
-	float uv[] = { 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0};
+	const int nbVertices = 36;
+	float vertices[nbVertices * 3] = {
+		-1, 1, 1,   1,-1, 1,   1, 1, 1,   // front
+		-1, 1, 1,  -1,-1, 1,   1,-1, 1,
+		-1, 1, 1,  -1, 1,-1,  -1,-1,-1,   // left
+		-1, 1, 1,  -1,-1,-1,  -1,-1, 1,
+		 1, 1, 1,   1,-1,-1,   1, 1,-1,   // right
+		 1, 1, 1,   1,-1, 1,   1,-1,-1,
+		-1, 1,-1,   1, 1,-1,   1,-1,-1,   // back
+		-1, 1,-1,   1,-1,-1,  -1,-1,-1,
+		-1, 1, 1,   1, 1, 1,   1, 1,-1,   // top
+		-1, 1, 1,   1, 1,-1,  -1, 1,-1,
+		-1,-1, 1,   1,-1,-1,   1,-1, 1,   // bottom
+		-1,-1, 1,  -1,-1,-1,   1,-1,-1,
+	};
+
+	float uv[nbVertices * 2] = {
+		0.0, 1.0,  0.5, 0.5,  0.5, 1.0,   // front
+		0.0, 1.0,  0.0, 0.5,  0.5, 0.5,
+		0.0, 1.0,  0.5, 1.0,  0.5, 0.5,   // left
+		0.0, 1.0,  0.5, 0.5,  0.0, 0.5,
+		0.0, 1.0,  0.5, 0.5,  0.5, 1.0,   // right
+		0.0, 1.0,  0.0, 0.5,  0.5, 0.5,
+		0.0, 1.0,  0.5, 1.0,  0.5, 0.5,   // back
+		0.0, 1.0,  0.5, 0.5,  0.0, 0.5,
+		0.0, 0.5,  0.5, 0.5,  0.5, 0.0,   // top
+		0.0, 0.5,  0.5, 0.0,  0.0, 0.0,
+		0.5, 1.0,  1.0, 0.5,  1.0, 1.0,   // bottom
+		0.5, 1.0,  0.5, 0.5,  1.0, 0.5,
+	};
 
 	VertexBufferData vbd;
-	vbd.NbVertices = 6;
+	vbd.NbVertices = nbVertices;
 	vbd.Vertices = vertices;
 	vbd.Normals = nullptr;
 	vbd.UV = uv;

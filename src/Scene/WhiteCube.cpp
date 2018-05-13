@@ -27,22 +27,22 @@ WhiteCube::WhiteCube():
 	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram);
 
-	m_Renderable->GetTransform().SetScale({ 0.2f, 0.2f, 0.2f });
+	m_Renderable->GetTransform().Scale = { 0.2f, 0.2f, 0.2f };
 }
 
 void WhiteCube::SetPosition(const glm::vec3& position)
 {
-	m_Renderable->GetTransform().SetPosition(position);
+	m_Renderable->GetTransform().Position = position;
 }
 
 glm::vec3 WhiteCube::GetPosition()
 {
-	return m_Renderable->GetTransform().GetPosition();
+	return m_Renderable->GetTransform().Position;
 }
 
 glm::vec3 WhiteCube::GetLightColor()
 {
-	return m_Renderable->GetColor();
+	return m_Renderable->Color;
 }
 
 void WhiteCube::Update(float dT)
@@ -55,6 +55,6 @@ void WhiteCube::Update(float dT)
 	float y = sin(m_TotalTime) * radius;
 	float z = 5.0f;
 
-	m_Renderable->GetTransform().SetPosition({ x, y, z });
+	m_Renderable->GetTransform().Position = { x, y, z };
 }
 

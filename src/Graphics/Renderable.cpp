@@ -9,7 +9,7 @@ Renderable::Renderable(std::shared_ptr<VertexBuffer> vertexBuffer, ShaderProgram
 	m_VertexBuffer(std::move(vertexBuffer)),
 	m_RefShaderProgram(refShaderProgram),
 	m_Textures(std::move(textures)),
-	m_ObjectColor(1,1,1)
+	Color(1,1,1)
 {
 }
 
@@ -31,14 +31,4 @@ ShaderProgram* Renderable::GetShaderProgram()
 Transform& Renderable::GetTransform()
 {
 	return m_Transform;
-}
-
-glm::vec3 Renderable::GetColor() const
-{
-	return m_ObjectColor;
-}
-
-void Renderable::SetColor(const glm::vec3& color)
-{
-	m_ObjectColor = color;
 }

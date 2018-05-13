@@ -25,7 +25,7 @@ CreateParShapeMesh(const std::string& meshName)
 		return{ par_shapes_create_cube(), mesh_delete };
 
 	if (meshName == "sphere")
-		return{ par_shapes_create_subdivided_sphere(5), mesh_delete };
+		return{ par_shapes_create_subdivided_sphere(1), mesh_delete };
 
 	if (meshName == "dodecahedron")
 		return{ par_shapes_create_dodecahedron(), mesh_delete };

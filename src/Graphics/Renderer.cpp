@@ -52,10 +52,7 @@ void Renderer::Init(const char* windowName, glm::uvec2 windowSize)
 
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-	ImGui_ImplGlfwGL3_Init(m_Window, true);
-	ImGui::StyleColorsDark();
-
+	
 	glfwMakeContextCurrent(m_Window);
 
 	if ( !gladLoadGL())
@@ -85,6 +82,10 @@ void Renderer::Init(const char* windowName, glm::uvec2 windowSize)
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
+
+	ImGui_ImplGlfwGL3_Init(m_Window, true);
+	ImGui::StyleColorsDark();
+
 }
 
 void Renderer::SetClearColor(glm::vec3 clearColor)
@@ -137,7 +138,7 @@ void Renderer::Render(const glm::mat4& projection, const glm::mat4& view)
 		glm::mat4 transform = renderable->GetTransform().GetMatrix();
 		m_CurrentShaderProgram->SetModel(transform);
 
-		glm::vec3 color = renderable->GetColor();
+		glm::vec3 color = renderable->Color;
 		m_CurrentShaderProgram->SetColor(color);
 
 		int nbVertice = m_CurrentVertexBuffer->GetNbVertice();

@@ -1,6 +1,12 @@
+#include <random>
+
 #include <glad/glad.h>
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/string_cast.hpp> // glm::to_string
 
 #include <imgui/imgui.h>
 
@@ -17,8 +23,8 @@
 
 #include "SceneNode.h"
 
-SceneNode::SceneNode(const char* vertexBuferName):
-	m_VertexBufferName(vertexBuferName)
+SceneNode::SceneNode(const char* nodeName, const char* vertexBuferName):
+	m_NodeName(nodeName)
 {	
 	auto vertexBufferManager = ServiceLocator::Get<VertexBufferManager>();
 	auto vertexBuffer = vertexBufferManager->GetVertexBuffer(vertexBuferName);
@@ -28,52 +34,57 @@ SceneNode::SceneNode(const char* vertexBuferName):
 
 	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(vertexBuffer, shaderProgram);
+
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<float> dist_time(-10.0, 10.0);
+	std::uniform_real_distribution<float> dist_oscillation(0.01f, 0.1f);
+
+	m_totalTime = dist_time(mt);
+	m_oscillationDistance = dist_oscillation(mt);
 }
 
 void SceneNode::SetPosition(const glm::vec3& position)
 {
-	glm_pos = position;
-	m_Renderable->GetTransform().SetPosition(position);
+	m_originalPosition = position;
 }
 
 void SceneNode::SetScale(const glm::vec3& scale)
 {
-	glm_scale = scale;
-	m_Renderable->GetTransform().SetScale(scale);
+	m_Renderable->GetTransform().Scale = scale;
 }
 
 void SceneNode::SetColor(const glm::vec3& color)
 {
-	glm_color = color;
-	m_Renderable->SetColor(color);
+	m_Renderable->Color = color;
 }
 
 void SceneNode::Update(float dT)
 {
-	ImGui::Begin(m_VertexBufferName);
+	m_totalTime += dT / 4.0f;
+	glm::vec3 pos = m_originalPosition;
+	pos.y += sin(m_totalTime) * m_oscillationDistance;
 
-	if (ImGui::DragFloat3("position", glm::value_ptr(glm_pos)))
-	{
-		m_Renderable->GetTransform().SetPosition(glm_pos);
-	}
+	m_Renderable->GetTransform().Position = pos;
 
-	if (ImGui::DragFloat3("scale", glm::value_ptr(glm_scale)))
-	{
-		m_Renderable->GetTransform().SetScale(glm_scale);
-	}
+	ImGui::Begin(m_NodeName);
 
-	if (ImGui::DragFloat3("euler", glm::value_ptr(glm_euler)))
-	{
-		m_Renderable->GetTransform().SetEuler(glm_euler);
-	}
-	
-	//ImGui::ColorEditMode(ImGuiColorEditMode_RGB);
+	Transform& t = m_Renderable->GetTransform();
 
-	if (ImGui::ColorEdit3("color 1", glm::value_ptr(glm_color)))
-	{
-		m_Renderable->SetColor(glm_color);
-	}
+	ImGui::DragFloat3("position", glm::value_ptr(t.Position));
+	ImGui::DragFloat3("scale", glm::value_ptr(t.Scale));
+	ImGui::DragFloat3("euler", glm::value_ptr(t.Euler));
+	ImGui::ColorEdit3("color", glm::value_ptr(m_Renderable->Color));
 
 	ImGui::End();
 }
 
+std::ostream& operator<<(std::ostream &os, const SceneNode& node) 
+{
+	Transform& t = node.m_Renderable->GetTransform();
+
+	return os << node.m_NodeName << ": " 
+		<< glm::to_string(t.Position) << " " 
+		<< glm::to_string(t.Scale) << " "
+		<< glm::to_string(t.Euler) << "\n";
+}

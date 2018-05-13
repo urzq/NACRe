@@ -2,6 +2,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <imgui/imgui.h>
+
 #include "Core/ServiceLocator.h"
 
 #include "Graphics/Renderer.h"
@@ -31,7 +33,10 @@ MinecraftCube::MinecraftCube()
 	auto renderer = ServiceLocator::Get<Renderer>();
 	m_Renderable = renderer->CreateRenderable(std::move(vertexBuffer), shaderProgram, { texture });
 
-	m_Renderable->GetTransform().SetScale({ 1.0f, 1.0f, 1.0f });
+	Transform& t = m_Renderable->GetTransform();
+	t.Position = { -3.20, 0.72, 0.57 };
+	t.Scale = { 0.3f, 0.3f, 0.3f };
+	t.Euler = { -0.020f, -0.160, -0.450 };
 }
 
 std::shared_ptr<VertexBuffer> MinecraftCube::CreateVertexBuffer()
@@ -78,14 +83,26 @@ std::shared_ptr<VertexBuffer> MinecraftCube::CreateVertexBuffer()
 
 void MinecraftCube::SetPosition(const glm::vec3& position)
 {
-	m_Renderable->GetTransform().SetPosition(position);
+	m_Renderable->GetTransform().Position = position;
 }
 
 glm::vec3 MinecraftCube::GetPosition()
 {
-	return m_Renderable->GetTransform().GetPosition();
+	return m_Renderable->GetTransform().Position;
 }
 
 void MinecraftCube::Update(float dT)
 {
+	m_TotalTime += dT * 1.7;
+	
+	Transform& t = m_Renderable->GetTransform();
+	t.Euler.y = m_TotalTime;
+
+	ImGui::Begin("minecraft");
+
+	ImGui::DragFloat3("position", glm::value_ptr(t.Position));
+	ImGui::DragFloat3("scale", glm::value_ptr(t.Scale));
+	ImGui::DragFloat3("euler", glm::value_ptr(t.Euler));
+
+	ImGui::End();
 }

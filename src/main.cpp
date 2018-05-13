@@ -22,7 +22,6 @@
 	Easier binding between vertexbuffer and shader (based on name ?)
 	Model loading
 	Material system.
-	Textured cube !
 	Handle all the TODO left in the code.
 	Less duplication between minecraftCube, WhiteCube and sceneNode.
 	Create a templated ResourceCache (cf. Urho3D)
@@ -31,6 +30,7 @@
 	Try to understand shadows.
 	Dynamic number of lights.
 	Have a clean separation between the engine and the game (lib).
+	Apparently, the engine should not be aware of glfw. put glfw only in the main.
 */
 
 int main()
@@ -39,7 +39,7 @@ int main()
 
 	auto renderer = ServiceLocator::Get<Renderer>();
 	renderer->Init("NACRe", glm::uvec2(1024, 768));
-	renderer->SetClearColor(Color(0x84A5FF));
+	renderer->SetClearColor(Color(0x00071C));
 
 	auto inputManager = ServiceLocator::Get<InputManager>();
 	inputManager->Init();

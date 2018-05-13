@@ -1,6 +1,8 @@
 #include <iostream>
 #include <assert.h>
 
+#include <ImGUiImpl/imgui_impl_glfw_gl3.h>
+
 #include "Core/ServiceLocator.h"
 #include "Graphics/Renderer.h"
 
@@ -19,6 +21,9 @@ void InputManager::KeyCallback(GLFWwindow *window, int key, int scancode, int ac
 {
 	auto inputManager = static_cast<InputManager*>(glfwGetWindowUserPointer(window));
 	inputManager->KeyCallback(key, scancode, action, mods);
+
+	// Imgui Needs to know which keys are pressed are released, like the ALT key.
+	ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
 }
 
 void InputManager::KeyCallback(int key, int scancode, int action, int mods)

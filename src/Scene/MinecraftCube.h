@@ -6,7 +6,7 @@
 
 class Renderable;
 
-// TODO: it's a sprite for now, but make it a cube :)
+// TODO: change the name of this class.
 class MinecraftCube
 {
 public:
@@ -22,6 +22,8 @@ private:
 
 private:
 	memory::unique_ptr_del<Renderable> m_Renderable;
+
+	float m_TotalTime = 0.0f;
 };
 
 #endif

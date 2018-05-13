@@ -1,3 +1,6 @@
+#include <iostream>
+#include <imgui/imgui.h>
+
 #include "Core/ServiceLocator.h"
 #include "Core/Color.h"
 
@@ -8,7 +11,7 @@
 
 struct NodeDescriptor
 {
-	const char* VertexBufferName;
+	const char* NodeName;
 	glm::vec3 Position;
 	glm::vec3 Scale;
 	Color Color;
@@ -18,23 +21,27 @@ Scene::Scene()
 {
 	NodeDescriptor SceneDescriptor[] =
 	{
-		{ "cube",		  { 1.38, 0.75,-1.13 }, { 1.5, 1.5, 1.5}, 0xF6C4FF },
-		{ "sphere",	      {-1.00, 2.93, 0.00 }, { 1.0, 1.0, 1.0}, 0xC4DCFF },
-		{ "dodecahedron", { 0.98, 0.02, 3.50 }, { 0.7, 0.7, 0.7}, 0x81FF68 },
-		{ "tetrahedron",  {-0.98, 1.42,-0.50 }, { 1.3, 1.3, 1.3}, 0xBAFFC3 },
-		{ "octahedron",   {-1.25, 0.79, 1.79 }, { 1.0, 1.0, 1.0}, 0xE6CEFF },
-		{ "icosahedron",  { 2.42, 0.00, 0.50 }, { 1.0, 1.0, 1.0}, 0xFFA100 }
+		{ "sphere_1", {-0.24, 0.19,-0.58 }, { 1.5, 1.5, 1.5}, 0x479BFA },
+		{ "sphere_2", { 0.69, 1.89,-0.11 }, { 0.5, 0.5, 0.5}, 0x479BFA },
+		{ "sphere_3", { 1.94, 0.52, 2.89 }, { 0.2, 0.2, 0.2}, 0x7A80FE },
+		{ "sphere_4", { 0.10, 2.48,-0.50 }, { 0.4, 0.4, 0.4}, 0xAE38C3 },
+		{ "sphere_5", { 2.44, 0.03,-1.28 }, { 0.6, 0.6, 0.6}, 0xF3A600 },
+		{ "sphere_6", {-2.41,-0.99,-0.41 }, { 0.4, 0.4, 0.4}, 0x479BFA }
 	};
 
 	for (auto& nodeDescriptor : SceneDescriptor)
 	{
-		auto node = std::make_unique<SceneNode>(nodeDescriptor.VertexBufferName);
+		auto node = std::make_unique<SceneNode>(nodeDescriptor.NodeName, "sphere");
 		node->SetPosition(nodeDescriptor.Position);
 		node->SetScale(nodeDescriptor.Scale);
 		node->SetColor(nodeDescriptor.Color);
 
 		m_SceneNodes.push_back(std::move(node));
 	}
+}
+
+Scene::~Scene()
+{
 }
 
 void Scene::Update(float dT, glm::vec3 cameraPosition)

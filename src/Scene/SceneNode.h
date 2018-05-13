@@ -10,7 +10,7 @@ class Renderable;
 class SceneNode
 {
 public:
-	SceneNode(const char* vertexBuferName);
+	SceneNode(const char* nodeName, const char* vertexBuferName);
 
 	void SetPosition(const glm::vec3& position);
 	void SceneNode::SetScale(const glm::vec3& scale);
@@ -19,13 +19,18 @@ public:
 	virtual void Update(float dT);
 
 private:
-	memory::unique_ptr_del<Renderable> m_Renderable;
-	const char* m_VertexBufferName;
+	friend std::ostream& operator<<(std::ostream&, const SceneNode&);
 
-	glm::vec3 glm_pos;
-	glm::vec3 glm_scale = glm::vec3(1,1,1);
-	glm::vec3 glm_euler;
-	glm::vec3 glm_color;
+private:
+	memory::unique_ptr_del<Renderable> m_Renderable;
+	const char* m_NodeName;
+
+	// Keep track of the original position, so we can then apply an offset (=oscillation) on it.
+	glm::vec3 m_originalPosition;
+	// We apply sinus() to this total time, and it gives us an oscillation
+	float m_totalTime;
+	// The scene node does an oscillation on its y axis, going from -m_oscillationDistance to m_oscillationDistance
+	float m_oscillationDistance;
 };
 
 #endif

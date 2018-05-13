@@ -351,7 +351,9 @@ static void ImGui_ImplGlfw_InstallCallbacks(GLFWwindow* window)
 {
 	glfwSetMouseButtonCallback(window, ImGui_ImplGlfw_MouseButtonCallback);
 	glfwSetScrollCallback(window, ImGui_ImplGlfw_ScrollCallback);
-	glfwSetKeyCallback(window, ImGui_ImplGlfw_KeyCallback);
+	//on the official imgui repo, this used to be uncommented. But I also use glfwSetKeyCallback in InputManager.cpp, 
+	//so this is overriden.
+	//glfwSetKeyCallback(window, ImGui_ImplGlfw_KeyCallback);
 	glfwSetCharCallback(window, ImGui_ImplGlfw_CharCallback);
 }
 

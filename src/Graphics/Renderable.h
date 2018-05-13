@@ -24,16 +24,14 @@ public:
 	ShaderProgram* GetShaderProgram();
 	Transform& GetTransform();
 	
-	glm::vec3 GetColor() const;
-	void SetColor(const glm::vec3& color);
+public:
+	glm::vec3 Color;
 
 private:
 	std::shared_ptr<VertexBuffer> m_VertexBuffer;
 	std::vector<GLTexture*> m_Textures;
 	ShaderProgram* m_RefShaderProgram;
 	Transform m_Transform;
-
-	glm::vec3 m_ObjectColor;
 };
 
 #endif
